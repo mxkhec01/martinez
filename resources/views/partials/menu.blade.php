@@ -67,7 +67,7 @@
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     @can('menu_cliente_access')
-                        <li class="c-sidebar-nav-dropdown {{ request()->is("admin/agregar-clientes*") ? "c-show" : "" }} {{ request()->is("admin/clientes*") ? "c-show" : "" }}">
+                        {{-- <li class="c-sidebar-nav-dropdown {{ request()->is("admin/agregar-clientes*") ? "c-show" : "" }} {{ request()->is("admin/clientes*") ? "c-show" : "" }}">
                             <a class="c-sidebar-nav-dropdown-toggle" href="#">
                                 <i class="fa-fw fas fa-users c-sidebar-nav-icon">
 
@@ -84,40 +84,40 @@
                                             {{ trans('cruds.agregarCliente.title') }}
                                         </a>
                                     </li>
-                                @endcan
+                                @endcan --}}
                                 @can('cliente_access')
-                                    <li class="c-sidebar-nav-item">
+                                    <li class="c-sidebar-nav-item ml-4">
                                         <a href="{{ route("admin.clientes.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/clientes") || request()->is("admin/clientes/*") ? "c-active" : "" }}">
                                             <i class="fa-fw fas fa-users c-sidebar-nav-icon">
 
                                             </i>
-                                            {{ trans('cruds.cliente.title') }}
+                                            Clientes
                                         </a>
                                     </li>
                                 @endcan
-                            </ul>
-                        </li>
+                            {{-- </ul>
+                        </li> --}}
                     @endcan
                     @can('menu_operadore_access')
-                        <li class="c-sidebar-nav-dropdown {{ request()->is("admin/operadors*") ? "c-show" : "" }} {{ request()->is("admin/ver-operadores*") ? "c-show" : "" }}">
+                        {{-- <li class="c-sidebar-nav-dropdown {{ request()->is("admin/operadors*") ? "c-show" : "" }} {{ request()->is("admin/ver-operadores*") ? "c-show" : "" }}">
                             <a class="c-sidebar-nav-dropdown-toggle" href="#">
                                 <i class="fa-fw fas fa-user c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.menuOperadore.title') }}
                             </a>
-                            <ul class="c-sidebar-nav-dropdown-items">
+                            <ul class="c-sidebar-nav-dropdown-items"> --}}
                                 @can('operador_access')
-                                    <li class="c-sidebar-nav-item">
+                                    <li class="c-sidebar-nav-item ml-4">
                                         <a href="{{ route("admin.operadors.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/operadors") || request()->is("admin/operadors/*") ? "c-active" : "" }}">
                                             <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
 
                                             </i>
-                                            {{ trans('cruds.operador.title') }}
+                                            Operadores
                                         </a>
                                     </li>
                                 @endcan
-                                @can('ver_operadore_access')
+                                {{-- @can('ver_operadore_access')
                                     <li class="c-sidebar-nav-item">
                                         <a href="{{ route("admin.ver-operadores.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/ver-operadores") || request()->is("admin/ver-operadores/*") ? "c-active" : "" }}">
                                             <i class="fa-fw fas fa-eye c-sidebar-nav-icon">
@@ -128,28 +128,28 @@
                                     </li>
                                 @endcan
                             </ul>
-                        </li>
+                        </li> --}}
                     @endcan
                     @can('menu_unidade_access')
-                        <li class="c-sidebar-nav-dropdown {{ request()->is("admin/unidads*") ? "c-show" : "" }} {{ request()->is("admin/agregar-unidades*") ? "c-show" : "" }}">
+                        {{-- <li class="c-sidebar-nav-dropdown {{ request()->is("admin/unidads*") ? "c-show" : "" }} {{ request()->is("admin/agregar-unidades*") ? "c-show" : "" }}">
                             <a class="c-sidebar-nav-dropdown-toggle" href="#">
-                                <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
+                                <i class="fa-fw fas fa-car c-sidebar-nav-icon">
 
                                 </i>
                                 {{ trans('cruds.menuUnidade.title') }}
                             </a>
-                            <ul class="c-sidebar-nav-dropdown-items">
+                            <ul class="c-sidebar-nav-dropdown-items"> --}}
                                 @can('unidad_access')
-                                    <li class="c-sidebar-nav-item">
+                                    <li class="c-sidebar-nav-item ml-4">
                                         <a href="{{ route("admin.unidads.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/unidads") || request()->is("admin/unidads/*") ? "c-active" : "" }}">
                                             <i class="fa-fw fas fa-car c-sidebar-nav-icon">
 
                                             </i>
-                                            {{ trans('cruds.unidad.title') }}
+                                            Unidades
                                         </a>
                                     </li>
                                 @endcan
-                                @can('agregar_unidade_access')
+                                {{-- @can('agregar_unidade_access')
                                     <li class="c-sidebar-nav-item">
                                         <a href="{{ route("admin.agregar-unidades.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/agregar-unidades") || request()->is("admin/agregar-unidades/*") ? "c-active" : "" }}">
                                             <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
@@ -160,7 +160,7 @@
                                     </li>
                                 @endcan
                             </ul>
-                        </li>
+                        </li> --}}
                     @endcan
                 </ul>
             </li>

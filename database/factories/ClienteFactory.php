@@ -21,6 +21,9 @@ class ClienteFactory extends Factory
             'codigo_postal' => $this->faker->postcode(),
             'estado' => $this->faker->state(),
             'ciudad' => $this->faker->citySuffix(),
+            'latitud' => $this->faker->latitude(),
+            'longitud' => $this->faker->longitude(),
+            
         ];
     }
 }

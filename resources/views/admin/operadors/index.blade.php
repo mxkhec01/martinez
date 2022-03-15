@@ -1,17 +1,18 @@
 @extends('layouts.admin')
 @section('content')
-@can('operador_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.operadors.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.operador.title_singular') }}
-            </a>
-        </div>
-    </div>
-@endcan
+
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.operador.title_singular') }} {{ trans('global.list') }}
+        {{ trans('global.list') }} de operadores
+        @can('operador_create')
+            {{-- <div style="margin-bottom: 10px;" class="row">
+                <div class="col-lg-12"> --}}
+                    <a class="btn btn-success float-right" href="{{ route('admin.operadors.create') }}">
+                        {{ trans('global.add') }} Operador
+                    </a>
+                {{-- </div>
+            </div> --}}
+        @endcan
     </div>
 
     <div class="card-body">
@@ -190,6 +191,14 @@
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
     pageLength: 100,
+    scrollY:        "60vh",
+        scrollX:        true,
+        scrollCollapse: true,
+        paging:         true,
+        fixedColumns:   {
+            left: 1,
+            right: 1
+        },
   });
   let table = $('.datatable-Operador:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){

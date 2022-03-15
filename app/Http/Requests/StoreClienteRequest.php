@@ -45,6 +45,14 @@ class StoreClienteRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'latitud' => [
+                'between:-90,90',
+                'nullable',
+            ],
+            'longitud' => [
+                'between:-180,180',
+                'nullable',
+            ],
         ];
     }
 }

@@ -33,7 +33,9 @@ class OperadorController extends Controller
     {
         $operador = Operador::create($request->all());
 
-        return redirect()->route('admin.operadors.index');
+        return redirect()->back()->with('message', 'Operador creado con éxito');
+
+        //return redirect()->route('admin.operadors.index');
     }
 
     public function edit(Operador $operador)

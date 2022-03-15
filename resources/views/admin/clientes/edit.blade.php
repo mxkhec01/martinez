@@ -80,6 +80,28 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.cliente.fields.ciudad_helper') }}</span>
             </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="latitud">{{ trans('cruds.cliente.fields.latitud') }}</label>
+                    <input class="form-control {{ $errors->has('latitud') ? 'is-invalid' : '' }}" type="text"name="latitud" id="latitud" value="{{ old('latitud', $cliente->latitud) }}">
+                    @if ($errors->has('latitud'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('latitud') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.cliente.fields.latitud_helper') }}</span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="longitud">{{ trans('cruds.cliente.fields.longitud') }}</label>
+                    <input class="form-control {{ $errors->has('longitud') ? 'is-invalid' : '' }}" type="text" name="longitud" id="longitud" value="{{ old('longitud', $cliente->longitud) }}">
+                    @if ($errors->has('longitud'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('longitud') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.cliente.fields.longitud_helper') }}</span>
+                </div>
+            </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}

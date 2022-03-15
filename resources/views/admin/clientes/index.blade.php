@@ -1,17 +1,18 @@
 @extends('layouts.admin')
 @section('content')
-@can('cliente_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.clientes.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.cliente.title_singular') }}
-            </a>
-        </div>
-    </div>
-@endcan
+
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.cliente.title_singular') }} {{ trans('global.list') }}
+        @can('cliente_create')
+    {{-- <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12"> --}}
+            <a class="btn btn-success float-right" href="{{ route('admin.clientes.create') }}">
+                {{ trans('global.add') }} Cliente
+            </a>
+        {{-- </div>
+    </div> --}}
+@endcan
     </div>
 
     <div class="card-body">
@@ -153,7 +154,15 @@
   $.extend(true, $.fn.dataTable.defaults, {
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
-    pageLength: 10,
+    pageLength: 100,
+    scrollY:        "50vh",
+        scrollX:        true,
+        scrollCollapse: true,
+        paging:         false,
+        fixedColumns:   {
+            left: 1,
+            right: 1
+        },
   });
   let table = $('.datatable-Cliente:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){

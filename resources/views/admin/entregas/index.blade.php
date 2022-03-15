@@ -43,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($entregas as $key => $entrega)
+                    @forelse($entregas as $key => $entrega)
                         <tr data-entry-id="{{ $entrega->id }}">
                             <td>
 
@@ -85,9 +85,10 @@
                                 @endcan
 
                             </td>
-
                         </tr>
-                    @endforeach
+                    @empty
+                    sin factura
+                    @endforelse
                 </tbody>
             </table>
         </div>

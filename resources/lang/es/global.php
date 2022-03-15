@@ -5,6 +5,7 @@ return [
     'add'                            => 'Agregar',
     'allRightsReserved'              => 'Todos los derechos reservados.',
     'areYouSure'                     => '¿Estás seguro?',
+    'areYouSureDelete'               => '¿Estás seguro que deseas eliminar el registro?',
     'clickHereToVerify'              => 'Haga click para verificar',
     'create'                         => 'Crear',
     'dashboard'                      => 'Panel de Control',

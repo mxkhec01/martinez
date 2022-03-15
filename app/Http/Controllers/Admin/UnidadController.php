@@ -32,8 +32,8 @@ class UnidadController extends Controller
     public function store(StoreUnidadRequest $request)
     {
         $unidad = Unidad::create($request->all());
-
-        return redirect()->route('admin.unidads.index');
+        return redirect()->back()->with('message', 'Unidad creada con éxito');
+        //return redirect()->route('admin.unidads.index');
     }
 
     public function edit(Unidad $unidad)

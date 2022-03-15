@@ -74,8 +74,8 @@ return [
         'title_singular' => 'Cliente',
     ],
     'cliente' => [
-        'title'          => 'Ver Clientes',
-        'title_singular' => 'Ver Cliente',
+        'title'          => 'Clientes',
+        'title_singular' => 'Cliente',
         'fields'         => [
             'id'                     => 'ID',
             'id_helper'              => ' ',
@@ -99,6 +99,10 @@ return [
             'updated_at_helper'      => ' ',
             'deleted_at'             => 'Deleted at',
             'deleted_at_helper'      => ' ',
+            'latitud'                => 'Latitud',
+            'latitud_helper'         => ' ',
+            'longitud'               => 'Longitud',
+            'longitud_helper'        => ' ',
         ],
     ],
     'agregarCliente' => [

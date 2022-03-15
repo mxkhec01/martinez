@@ -33,7 +33,14 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::create($request->all());
 
-        return redirect()->route('admin.clientes.index');
+        // if ($this->confirm('Usuario creado con éxito, ¿deseas dar de alta un nuevo cliente?')) {
+        //     return redirect()->route('admin.clientes.create');
+            
+        // }else {
+
+        return redirect()->back()->with('message', 'Cliente creado con éxito');
+        //return redirect()->route('admin.clientes.index');
+        // }
     }
 
     public function edit(Cliente $cliente)

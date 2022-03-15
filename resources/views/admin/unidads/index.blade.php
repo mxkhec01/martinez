@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-@can('unidad_create')
+{{-- @can('unidad_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.unidads.create') }}">
@@ -8,10 +8,19 @@
             </a>
         </div>
     </div>
-@endcan
+@endcan --}}
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.unidad.title_singular') }} {{ trans('global.list') }}
+        @can('unidad_create')
+            {{-- <div style="margin-bottom: 10px;" class="row">
+                <div class="col-lg-12"> --}}
+                    <a class="btn btn-success float-right" href="{{ route('admin.unidads.create') }}">
+                        Agregar unidad
+                    </a>
+                {{-- </div>
+            </div> --}}
+        @endcan
     </div>
 
     <div class="card-body">
@@ -136,6 +145,14 @@
     orderCellsTop: true,
     order: [[ 1, 'desc' ]],
     pageLength: 100,
+    scrollY:        "60vh",
+        scrollX:        true,
+        scrollCollapse: true,
+        paging:         true,
+        fixedColumns:   {
+            left: 1,
+            right: 1
+        },
   });
   let table = $('.datatable-Unidad:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
