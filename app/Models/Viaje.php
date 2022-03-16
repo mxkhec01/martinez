@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Support\HasAdvancedFilter;
+
+
 class Viaje extends Model
 {
     use SoftDeletes;
     use HasFactory;
+    use HasAdvancedFilter;
 
     public const ESTADO_SELECT = [
         'activo'     => 'Activo',
@@ -27,6 +31,18 @@ class Viaje extends Model
     ];
 
     public $table = 'viajes';
+
+    public $orderable = [
+        'id',
+        'viaje',
+        'otro',
+    ];
+
+    public $filterable = [
+        'id',
+        'viaje',
+        'otro',
+    ];
 
     protected $dates = [
         'fecha_pago',

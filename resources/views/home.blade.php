@@ -50,7 +50,7 @@
                             <!-- /.col-->
                         </div>
                         <!-- /.row-->
-              
+
                         <div class="row pb-4">
 
                                 {{-- Widget - latest entries --}}
@@ -135,7 +135,6 @@
                                     </table>
                                 </div>
 
-                            
                         </div>{{-- fin del row --}}
                         <div class="row pb-4">
                             <div class="card col-md-6">

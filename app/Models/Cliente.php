@@ -20,6 +20,10 @@ class Cliente extends Model
         'deleted_at',
     ];
 
+    /**
+     * @param string[] $fillable
+     */
+
     protected $fillable = [
         'razon_social',
         'calle',
@@ -34,6 +38,7 @@ class Cliente extends Model
         'latitud',
         'longitud',
     ];
+
 
     protected function serializeDate(DateTimeInterface $date)
     {

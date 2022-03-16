@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "7.4",
         "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -16,8 +16,10 @@
         "laravel/dusk": "^6.11",
         "laravel/framework": "^8.70.1",
         "laravel/tinker": "^2.5",
-        "yajra/laravel-datatables-oracle": "^9.18",
-        "laravel/ui": "^3.3"
+        "laravel/ui": "^3.3",
+        "livewire/livewire": "^2.10",
+        "mediconesystems/livewire-datatables": "^0.7.0",
+        "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
