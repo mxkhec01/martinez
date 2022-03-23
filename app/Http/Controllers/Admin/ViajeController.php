@@ -31,6 +31,24 @@ class ViajeController extends Controller
         return view('admin.viajes.index', compact('clientes', 'operadors', 'unidads', 'viajes'));
     }
 
+    public function mostrar($valor)
+    {
+        abort_if(Gate::denies('viaje_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        if (!$valor || $valor=='todo') {
+            $viajes = Viaje::with(['cliente', 'unidad', 'operador'])->get();
+        }else {
+            $viajes = Viaje::with(['cliente', 'unidad', 'operador'])->where('estado', '=', $valor)->get();
+        }
+        $clientes = Cliente::get();
+
+        $unidads = Unidad::get();
+
+        $operadors = Operador::get();
+
+        return view('admin.viajes.index', compact('clientes', 'operadors', 'unidads', 'viajes', 'valor'));
+    }
+
     public function create()
     {
         abort_if(Gate::denies('viaje_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');

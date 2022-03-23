@@ -34,7 +34,7 @@
                                     ]) style="max-width: 18rem;">
                                         <div class="card-header">
                                             <h2 class="card-text text-left">{{ $y->numero ?? '' }}<a
-                                                    href="https://google.com" class="btn float-right text-white">Lista</a>
+                                                    href="{{ route('admin.viajes.mostrar',['valor' => $y->estado]) }}" class="btn float-right text-white">Lista</a>
                                             </h2>
                                         </div>
                                         <div class="card-body ">
