@@ -76,6 +76,7 @@
                                     </a>
                                 @endcan
 
+
                                 @can('entrega_delete')
                                     <form action="{{ route('admin.entregas.destroy', $entrega->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
@@ -143,7 +144,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>

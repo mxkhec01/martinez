@@ -1,21 +1,12 @@
-@extends('layouts.admin')
-@section('content')
-
 <div class="card">
     <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.entrega.title_singular') }}
+        Nueva Entrega para viaje {{ $viaje->nombre_viaje  }}
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.entregas.store") }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("admin.viajes.entregas.store", $viaje) }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="viaje_id">{{ trans('cruds.entrega.fields.viaje') }}</label>
-                <select class="form-control select2 {{ $errors->has('viaje') ? 'is-invalid' : '' }}" name="viaje_id" id="viaje_id">
-                    @foreach($viajes as $id => $entry)
-                        <option value="{{ $id }}" {{ old('viaje_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
                 @if($errors->has('viaje'))
                     <div class="invalid-feedback">
                         {{ $errors->first('viaje') }}
@@ -37,35 +28,25 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.entrega.fields.cliente_helper') }}</span>
             </div>
-            <div class="form-group">
-                <label for="fecha_llegada">{{ trans('cruds.entrega.fields.fecha_llegada') }}</label>
-                <input class="form-control date {{ $errors->has('fecha_llegada') ? 'is-invalid' : '' }}" type="text" name="fecha_llegada" id="fecha_llegada" value="{{ old('fecha_llegada') }}">
-                @if($errors->has('fecha_llegada'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('fecha_llegada') }}
+
+            <h5>Facturas de la entrega <button id="add_row" class="btn btn-default float-right">Agregar Factura</button> </h5>
+                <table class="table" id="facturas_table">
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-md-12">
+
                     </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.entrega.fields.fecha_llegada_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="fecha_entrega">{{ trans('cruds.entrega.fields.fecha_entrega') }}</label>
-                <input class="form-control date {{ $errors->has('fecha_entrega') ? 'is-invalid' : '' }}" type="text" name="fecha_entrega" id="fecha_entrega" value="{{ old('fecha_entrega') }}">
-                @if($errors->has('fecha_entrega'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('fecha_entrega') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.entrega.fields.fecha_entrega_helper') }}</span>
-            </div>
+                </div>
+
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
             </div>
         </form>
+
     </div>
 </div>
 
-
-
-@endsection

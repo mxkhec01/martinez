@@ -81,6 +81,7 @@ class ViajeController extends Controller
 
         $viaje->load('cliente', 'unidad', 'operador');
 
+
         return view('admin.viajes.edit', compact('clientes', 'operadors', 'unidads', 'viaje'));
     }
 
@@ -88,7 +89,8 @@ class ViajeController extends Controller
     {
         $viaje->update($request->all());
 
-        return redirect()->route('admin.viajes.index');
+        return redirect()->back()->with('message', 'Viaje actualizado con éxito');
+
     }
 
     public function show(Viaje $viaje)

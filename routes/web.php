@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Entrega
     Route::delete('entregas/destroy', 'EntregaController@massDestroy')->name('entregas.massDestroy');
-    Route::resource('entregas', 'EntregaController');
+
 
     // Menu Asigna Entrega
     Route::delete('menu-asigna-entregas/destroy', 'MenuAsignaEntregaController@massDestroy')->name('menu-asigna-entregas.massDestroy');
@@ -61,6 +61,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('viajes/destroy', 'ViajeController@massDestroy')->name('viajes.massDestroy');
     Route::get('viajes/estado/{valor}','ViajeController@mostrar')->name('viajes.mostrar');;
     Route::resource('viajes', 'ViajeController');
+    Route::resource('viajes.entregas', 'EntregaController');
 
     // Anticipos Viaje
     Route::delete('anticipos-viajes/destroy', 'AnticiposViajeController@massDestroy')->name('anticipos-viajes.massDestroy');

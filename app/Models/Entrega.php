@@ -43,6 +43,11 @@ class Entrega extends Model
         return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
+    public function facturas()
+    {
+        return $this->hasMany(Factura::class);
+    }
+
     public function getFechaLlegadaAttribute($value)
     {
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;

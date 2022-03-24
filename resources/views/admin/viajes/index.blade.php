@@ -19,7 +19,7 @@
             <ul class="nav nav-tabs float-right">
                 @foreach(App\Models\Viaje::ESTADO_SELECT as $key => $item)
                     <li class="nav-item">
-                        <a class="nav-link text-white {{ App\Models\Viaje::ESTADO_BACKGROUND[$key] }} {{ $valor == $key ? 'active' : '' }}" href="{{ route('admin.viajes.mostrar',['valor' => $key]) }}">{{ $item }}</a>
+                        <a class="nav-link  {{  $valor == $key ? App\Models\Viaje::ESTADO_BACKGROUND[$key] : '' }} {{ $valor == $key ? 'text-white' : '' }}" href="{{ route('admin.viajes.mostrar',['valor' => $key]) }}">{{ $item }}</a>
                     </li>
                 @endforeach
                 <li class="nav-item">

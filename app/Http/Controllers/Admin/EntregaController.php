@@ -8,6 +8,7 @@ use App\Http\Requests\StoreEntregaRequest;
 use App\Http\Requests\UpdateEntregaRequest;
 use App\Models\Cliente;
 use App\Models\Entrega;
+use App\Models\Factura;
 use App\Models\Viaje;
 use Gate;
 use Illuminate\Http\Request;
@@ -35,11 +36,19 @@ class EntregaController extends Controller
         return view('admin.entregas.create', compact('clientes', 'viajes'));
     }
 
-    public function store(StoreEntregaRequest $request)
+    public function store(StoreEntregaRequest $request, Viaje $viaje)
     {
-        $entrega = Entrega::create($request->all());
 
-        return redirect()->route('admin.entregas.index');
+        $entrega  =  $viaje->entregas()->create($request->all());
+        $facturas = $request->input('facturas', []);
+
+        for ($factura=0; $factura < count($facturas); $factura++) {
+            if ($facturas[$factura] != '') {
+                Factura::create(['entrega_id'=> $entrega->id, 'numero_factura' => $facturas[$factura] ]);
+            }
+        }
+
+        return redirect()->back()->with('message', 'Entrega creada con éxito');
     }
 
     public function edit(Entrega $entrega)
