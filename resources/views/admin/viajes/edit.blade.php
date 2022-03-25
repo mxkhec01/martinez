@@ -6,10 +6,12 @@
         </div>
 
         <div class="card-body">
+
             <form method="POST" action="{{ route("admin.viajes.update", [$viaje->id]) }}" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
-                <div class="form-group">
+                <div class="form-row">
+                <div class="form-group col">
                     <label for="nombre_viaje">{{ trans('cruds.viaje.fields.nombre_viaje') }}</label>
                     <input class="form-control {{ $errors->has('nombre_viaje') ? 'is-invalid' : '' }}" type="text"
                            name="nombre_viaje" id="nombre_viaje"
@@ -21,7 +23,27 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.viaje.fields.nombre_viaje_helper') }}</span>
                 </div>
-                <div class="form-group">
+                    <div class="form-group col">
+                        <label class="required">{{ trans('cruds.viaje.fields.estado') }}</label>
+                        <select class="form-control {{ $errors->has('estado') ? 'is-invalid' : '' }}" name="estado"
+                                id="estado" required>
+                            <option value
+                                    disabled {{ old('estado', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                            @foreach(App\Models\Viaje::ESTADO_SELECT as $key => $label)
+                                <option
+                                    value="{{ $key }}" {{ old('estado', $viaje->estado) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                            @endforeach
+                        </select>
+                        @if($errors->has('estado'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('estado') }}
+                            </div>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.viaje.fields.estado_helper') }}</span>
+                    </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group col">
                     <label for="cliente_id">{{ trans('cruds.viaje.fields.cliente') }}</label>
                     <select class="form-control select2 {{ $errors->has('cliente') ? 'is-invalid' : '' }}"
                             name="cliente_id" id="cliente_id">
@@ -37,7 +59,9 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.viaje.fields.cliente_helper') }}</span>
                 </div>
-                <div class="form-group">
+
+
+                <div class="form-group col">
                     <label for="unidad_id">{{ trans('cruds.viaje.fields.unidad') }}</label>
                     <select class="form-control select2 {{ $errors->has('unidad') ? 'is-invalid' : '' }}"
                             name="unidad_id" id="unidad_id">
@@ -53,7 +77,7 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.viaje.fields.unidad_helper') }}</span>
                 </div>
-                <div class="form-group">
+                <div class="form-group col">
                     <label for="operador_id">{{ trans('cruds.viaje.fields.operador') }}</label>
                     <select class="form-control select2 {{ $errors->has('operador') ? 'is-invalid' : '' }}"
                             name="operador_id" id="operador_id">
@@ -69,23 +93,7 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.viaje.fields.operador_helper') }}</span>
                 </div>
-                <div class="form-group">
-                    <label class="required">{{ trans('cruds.viaje.fields.estado') }}</label>
-                    <select class="form-control {{ $errors->has('estado') ? 'is-invalid' : '' }}" name="estado"
-                            id="estado" required>
-                        <option value
-                                disabled {{ old('estado', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                        @foreach(App\Models\Viaje::ESTADO_SELECT as $key => $label)
-                            <option
-                                value="{{ $key }}" {{ old('estado', $viaje->estado) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                        @endforeach
-                    </select>
-                    @if($errors->has('estado'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('estado') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.viaje.fields.estado_helper') }}</span>
+
                 </div>
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">

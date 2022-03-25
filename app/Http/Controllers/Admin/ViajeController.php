@@ -59,14 +59,14 @@ class ViajeController extends Controller
 
         $operadors = Operador::pluck('nombre', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.viajes.create', compact('clientes', 'operadors', 'unidads'));
+        return view('admin.viajes.create', compact('clientes', 'operadors', 'unidads'))->with(['valor'=>'todo',]);
     }
 
     public function store(StoreViajeRequest $request)
     {
         $viaje = Viaje::create($request->all());
 
-        return redirect()->route('admin.viajes.index');
+        return redirect()->route('admin.viajes.index')->with(['valor'=>'todo',]);
     }
 
     public function edit(Viaje $viaje)

@@ -63,6 +63,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('viajes', 'ViajeController');
     Route::resource('viajes.entregas', 'EntregaController');
 
+
+    // Torre de control
+    Route::resource('control', 'ControlController');
+
+
     // Anticipos Viaje
     Route::delete('anticipos-viajes/destroy', 'AnticiposViajeController@massDestroy')->name('anticipos-viajes.massDestroy');
     Route::resource('anticipos-viajes', 'AnticiposViajeController');

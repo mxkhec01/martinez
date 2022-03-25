@@ -11,6 +11,8 @@
     @endcan
     <div class="card">
         <div class="card-header">
+
+            {{  $valor= $valor ?? 'todo' }}
             @if($valor == 'todo')
                 Viajes en cualquier estado
             @else
@@ -19,11 +21,13 @@
             <ul class="nav nav-tabs float-right">
                 @foreach(App\Models\Viaje::ESTADO_SELECT as $key => $item)
                     <li class="nav-item">
-                        <a class="nav-link  {{  $valor == $key ? App\Models\Viaje::ESTADO_BACKGROUND[$key] : '' }} {{ $valor == $key ? 'text-white' : '' }}" href="{{ route('admin.viajes.mostrar',['valor' => $key]) }}">{{ $item }}</a>
+                        <a class="nav-link  {{  $valor == $key ? App\Models\Viaje::ESTADO_BACKGROUND[$key] : '' }} {{ $valor == $key ? 'text-white' : '' }}"
+                           href="{{ route('admin.viajes.mostrar',['valor' => $key]) }}">{{ $item }}</a>
                     </li>
                 @endforeach
                 <li class="nav-item">
-                    <a class="nav-link {{ $valor == 'todo' ? 'active' : '' }}" href="{{ route('admin.viajes.mostrar',['valor' => 'todo']) }}">Todos</a>
+                    <a class="nav-link {{ $valor == 'todo' ? 'active' : '' }}"
+                       href="{{ route('admin.viajes.mostrar',['valor' => 'todo']) }}">Todos</a>
                 </li>
 
             </ul>
@@ -138,7 +142,8 @@
                             </td>
                             <td>
                                 @can('viaje_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.viajes.show', $viaje->id) }}">
+                                    <a class="btn btn-xs btn-primary"
+                                       href="{{ route('admin.viajes.show', $viaje->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
@@ -150,10 +155,13 @@
                                 @endcan
 
                                 @can('viaje_delete')
-                                    <form action="{{ route('admin.viajes.destroy', $viaje->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSureDelete') }}');" style="display: inline-block;">
+                                    <form action="{{ route('admin.viajes.destroy', $viaje->id) }}" method="POST"
+                                          onsubmit="return confirm('{{ trans('global.areYouSureDelete') }}');"
+                                          style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="btn btn-xs btn-danger"
+                                               value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
 
@@ -182,7 +190,7 @@
                 url: "{{ route('admin.viajes.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
-                    var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+                    var ids = $.map(dt.rows({selected: true}).nodes(), function (entry) {
                         return $(entry).data('entry-id')
                     });
 
@@ -197,8 +205,11 @@
                             headers: {'x-csrf-token': _token},
                             method: 'POST',
                             url: config.url,
-                            data: { ids: ids, _method: 'DELETE' }})
-                            .done(function () { location.reload() })
+                            data: {ids: ids, _method: 'DELETE'}
+                        })
+                            .done(function () {
+                                location.reload()
+                            })
                     }
                 }
             }
@@ -207,19 +218,19 @@
 
             $.extend(true, $.fn.dataTable.defaults, {
                 orderCellsTop: true,
-                order: [[ 1, 'desc' ]],
+                order: [[1, 'desc']],
                 pageLength: 100,
-                scrollY:        "50vh",
-                scrollX:        true,
+                scrollY: "50vh",
+                scrollX: true,
                 scrollCollapse: true,
-                paging:         false,
-                fixedColumns:   {
+                paging: false,
+                fixedColumns: {
                     left: 1,
                     right: 1
                 },
             });
-            let table = $('.datatable-Viaje:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-            $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
+            let table = $('.datatable-Viaje:not(.ajaxTable)').DataTable({buttons: dtButtons})
+            $('a[data-toggle="tab"]').on('shown.bs.tab click', function (e) {
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();
             });
@@ -239,9 +250,9 @@
                     .search(value, strict)
                     .draw()
             });
-            table.on('column-visibility.dt', function(e, settings, column, state) {
+            table.on('column-visibility.dt', function (e, settings, column, state) {
                 visibleColumnsIndexes = []
-                table.columns(":visible").every(function(colIdx) {
+                table.columns(":visible").every(function (colIdx) {
                     visibleColumnsIndexes.push(colIdx);
                 });
             })
