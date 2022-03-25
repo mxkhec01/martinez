@@ -59,7 +59,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Viaje
     Route::delete('viajes/destroy', 'ViajeController@massDestroy')->name('viajes.massDestroy');
-    Route::get('viajes/estado/{valor}','ViajeController@mostrar')->name('viajes.mostrar');;
+    Route::get('viajes/estado/{valor}','ViajeController@mostrar')->name('viajes.mostrar');
+    Route::get('viajes/gastos/{viaje}','ViajeController@gastos')->name('viajes.gastos');
     Route::resource('viajes', 'ViajeController');
     Route::resource('viajes.entregas', 'EntregaController');
 

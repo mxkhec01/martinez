@@ -5,66 +5,51 @@
     <div class="card-header">
         {{ trans('global.show') }} {{ trans('cruds.viaje.title') }}
     </div>
+    @php
 
+
+    $entregas_activas = $viaje->entregas->whereNull('fecha_entrega');
+    $num_entregas_activas = $entregas_activas->count();
+    $num_total_entregas = $viaje->entregas->count();
+
+    @endphp
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.viajes.index') }}">
-                    {{ trans('global.back_to_list') }}
+                <a class="btn btn-default" href="{{ URL::previous() }}">
+                    Regresar
                 </a>
             </div>
-            <table class="table table-bordered table-striped">
+
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Viaje</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Fecha llegada</th>
+                    <th scope="col">Fecha Entrega</th>
+                </tr>
+                </thead>
                 <tbody>
+                @foreach($viaje->entregas as $entrega)
                     <tr>
-                        <th>
-                            {{ trans('cruds.viaje.fields.id') }}
-                        </th>
-                        <td>
-                            {{ $viaje->id }}
-                        </td>
+                        <th scope="row">{{ $entrega->id }}</th>
+                        <td>{{ $viaje->nombre_viaje }}</td>
+                        <td>{{ $entrega->cliente->razon_social }}</td>
+                        <td>{{ $entrega->fecha_llegada }}</td>
+                        <td>{{ $entrega->fecha_entrega }}</td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.viaje.fields.nombre_viaje') }}
-                        </th>
-                        <td>
-                            {{ $viaje->nombre_viaje }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.viaje.fields.cliente') }}
-                        </th>
-                        <td>
-                            {{ $viaje->cliente->razon_social ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.viaje.fields.unidad') }}
-                        </th>
-                        <td>
-                            {{ $viaje->unidad->codigo ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.viaje.fields.operador') }}
-                        </th>
-                        <td>
-                            {{ $viaje->operador->nombre ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.viaje.fields.estado') }}
-                        </th>
-                        <td>
-                            {{ App\Models\Viaje::ESTADO_SELECT[$viaje->estado] ?? '' }}
-                        </td>
-                    </tr>
+                @endforeach
+
                 </tbody>
             </table>
+
+
+
+
+
+
             <div class="form-group">
                 <a class="btn btn-default" href="{{ route('admin.viajes.index') }}">
                     {{ trans('global.back_to_list') }}

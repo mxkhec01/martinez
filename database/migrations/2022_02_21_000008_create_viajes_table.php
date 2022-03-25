@@ -16,4 +16,5 @@ class CreateViajesTable extends Migration
             $table->softDeletes();
         });
     }
+
 }

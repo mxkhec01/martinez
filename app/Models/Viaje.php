@@ -87,4 +87,8 @@ class Viaje extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public function casetas(){
+        return $this->hasMany(EvidenciaCaseta::class);
+    }
 }

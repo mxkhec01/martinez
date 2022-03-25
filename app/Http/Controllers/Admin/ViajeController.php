@@ -97,9 +97,20 @@ class ViajeController extends Controller
     {
         abort_if(Gate::denies('viaje_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $viaje->load('cliente', 'unidad', 'operador');
+        $viaje->load('cliente', 'unidad', 'operador','entregas');
+
+
 
         return view('admin.viajes.show', compact('viaje'));
+    }
+
+    public function gastos(Viaje $viaje)
+    {
+        abort_if(Gate::denies('viaje_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $viaje->with('casetas');
+
+        return view('admin.viajes.gastos', compact('viaje'));
     }
 
     public function destroy(Viaje $viaje)
