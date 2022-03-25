@@ -88,9 +88,9 @@ class HomeController
         }
 
         //función para traer los últimos 21 días para la gráfica
-  
+
         $dias = array();
-        for($i = 21; $i >= 0; $i--) 
+        for($i = 21; $i >= 0; $i--)
             $dias[] = date("Y-m-d", strtotime('-'. $i .' days'));
 
             $pagos = [];
@@ -104,12 +104,12 @@ class HomeController
                                 ->where('fecha','<',$maniana)  //ya no se le suma el día
                                 ->sum('monto');
             }
-        
+
             $valor = Unidad::selectRaw('sum(case when viajes.id is null then 0 else 1 end) as numero, codigo')
                 ->leftJoin('viajes', function ($leftJoin) use($dias) {
                     $leftJoin
                         ->on('unidads.id', '=', 'viajes.unidad_id')
-                        ->on('viajes.created_at','>=',$dias[0]);
+                        ->on('viajes.created_at','>=','STR_TO_DATE('.$dias[0].')';
                 })
                 ->groupBy('codigo')
                 ->orderBy('numero','desc')
@@ -117,8 +117,8 @@ class HomeController
 
                 $unidades= $valor->pluck('codigo');
                 $viajesUnidad = $valor->pluck('numero');
-            
-           
+
+
 
         $pagos = json_encode($pagos,JSON_NUMERIC_CHECK);
         $dias  = json_encode($dias ,JSON_NUMERIC_CHECK);
@@ -127,7 +127,7 @@ class HomeController
         $anticipos = json_encode($anticipos ,JSON_NUMERIC_CHECK);
         //dd($dias);
 
-        
+
         return view('home', compact('viajesEstatus', 'settings1','settings2','pagos','dias','unidades','viajesUnidad','anticipos'));
 
         //return view('home');
