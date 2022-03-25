@@ -109,7 +109,7 @@ class HomeController
                 ->leftJoin('viajes', function ($leftJoin) use($dias) {
                     $leftJoin
                         ->on('unidads.id', '=', 'viajes.unidad_id')
-                        ->on('viajes.created_at','>=','STR_TO_DATE('.$dias[0].')';
+                        ->on('viajes.created_at','>=',DB::raw($dias[0]));
                 })
                 ->groupBy('codigo')
                 ->orderBy('numero','desc')
