@@ -141,29 +141,47 @@
                                 {{ App\Models\Viaje::ESTADO_SELECT[$viaje->estado] ?? '' }}
                             </td>
                             <td>
+                                <div class="dropdown text-center">
+                                    <a class="dropdown-button" id="dropdown-menu-{{ $viaje->id }}" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown-menu-{{ $viaje->id }}">
                                 @can('viaje_show')
-                                    <a class="btn btn-xs btn-primary"
+                                    <a class="dropdown-item float-right"
                                        href="{{ route('admin.viajes.show', $viaje->id) }}">
-                                        {{ trans('global.view') }}
+                                        <i class="fa fa-truck fa-lg" style="width: 50px;"></i>
+                                        Entregas
+                                    </a>
+                                @endcan
+                                @can('viaje_show')
+                                    <a class="dropdown-item"
+                                       href="{{ route('admin.viajes.gastos', $viaje->id) }}">
+                                        <i class="fa fa-eye" style="width: 50px;"></i>
+                                        Ver gastos
                                     </a>
                                 @endcan
 
                                 @can('viaje_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.viajes.edit', $viaje->id) }}">
+                                    <a class="dropdown-item" href="{{ route('admin.viajes.edit', $viaje->id) }}">
+                                        <i class="fas fa-edit" style="width: 50px;"></i>
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
                                 @can('viaje_delete')
-                                    <form action="{{ route('admin.viajes.destroy', $viaje->id) }}" method="POST"
-                                          onsubmit="return confirm('{{ trans('global.areYouSureDelete') }}');"
-                                          style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger"
-                                               value="{{ trans('global.delete') }}">
-                                    </form>
+
+                                        <form id="delete-{{ $viaje->id }}" action="{{ route('admin.viajes.destroy', $viaje->id) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                        </form>
+                                        <a class="dropdown-item" href="#" onclick="if(confirm('{{ trans('global.areYouSure') }}')) document.getElementById('delete-{{ $viaje->id }}').submit()">
+                                            <i class="fa fa-trash" style="width: 50px;"> </i>
+                                            {{ trans('global.delete') }}
+                                        </a>
+
                                 @endcan
+                                </div>
+                                </div>
 
                             </td>
 
@@ -178,9 +196,29 @@
 
 
 @endsection
+
+@section('styles')
+    <style>
+        .dataTables_scrollBody, .dataTables_wrapper {
+            position: static !important;
+        }
+        .dropdown-button {
+            cursor: pointer;
+            font-size: 2em;
+            display:block
+        }
+        .dropdown-menu i {
+            font-size: 1.33333333em;
+            line-height: 0.75em;
+            vertical-align: -15%;
+            color: #000;
+        }
+    </style>
+@endsection
+
 @section('scripts')
     @parent
-    <script>
+  <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
             @can('viaje_delete')

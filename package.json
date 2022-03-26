@@ -15,5 +15,8 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.4.12"
+    },
+    "dependencies": {
+        "popper.js": "^1.16.1"
     }
 }
