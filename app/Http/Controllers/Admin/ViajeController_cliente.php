@@ -10,7 +10,7 @@ use App\Models\Cliente;
 use App\Models\Operador;
 use App\Models\Unidad;
 use App\Models\Viaje;
-use Illuminate\Support\Facades\Gate;
+use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,14 +20,15 @@ class ViajeController extends Controller
     {
         abort_if(Gate::denies('viaje_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $viajes = Viaje::with([ 'unidad', 'operador'])->get();
+        $viajes = Viaje::with(['cliente', 'unidad', 'operador'])->get();
 
+        $clientes = Cliente::get();
 
         $unidads = Unidad::get();
 
         $operadors = Operador::get();
 
-        return view('admin.viajes.index', compact( 'operadors', 'unidads', 'viajes'));
+        return view('admin.viajes.index', compact('clientes', 'operadors', 'unidads', 'viajes'));
     }
 
     public function mostrar($valor)
@@ -35,27 +36,30 @@ class ViajeController extends Controller
         abort_if(Gate::denies('viaje_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if (!$valor || $valor=='todo') {
-            $viajes = Viaje::with([ 'unidad', 'operador'])->get();
+            $viajes = Viaje::with(['cliente', 'unidad', 'operador'])->get();
         }else {
-            $viajes = Viaje::with(['unidad', 'operador'])->where('estado', '=', $valor)->get();
+            $viajes = Viaje::with(['cliente', 'unidad', 'operador'])->where('estado', '=', $valor)->get();
         }
-
+        $clientes = Cliente::get();
 
         $unidads = Unidad::get();
 
         $operadors = Operador::get();
 
-        return view('admin.viajes.index', compact( 'operadors', 'unidads', 'viajes', 'valor'));
+        return view('admin.viajes.index', compact('clientes', 'operadors', 'unidads', 'viajes', 'valor'));
     }
 
     public function create()
     {
         abort_if(Gate::denies('viaje_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $clientes = Cliente::pluck('razon_social', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $unidads = Unidad::pluck('codigo', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $operadors = Operador::pluck('nombre', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.viajes.create', compact( 'operadors', 'unidads'))->with(['valor'=>'todo',]);
+        return view('admin.viajes.create', compact('clientes', 'operadors', 'unidads'))->with(['valor'=>'todo',]);
     }
 
     public function store(StoreViajeRequest $request)
@@ -75,10 +79,10 @@ class ViajeController extends Controller
 
         $operadors = Operador::pluck('nombre', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $viaje->load('unidad', 'operador');
+        $viaje->load('cliente', 'unidad', 'operador');
 
 
-        return view('admin.viajes.edit', compact( 'clientes','operadors', 'unidads', 'viaje'));
+        return view('admin.viajes.edit', compact('clientes', 'operadors', 'unidads', 'viaje'));
     }
 
     public function update(UpdateViajeRequest $request, Viaje $viaje)
@@ -93,7 +97,7 @@ class ViajeController extends Controller
     {
         abort_if(Gate::denies('viaje_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $viaje->load( 'unidad', 'operador','entregas');
+        $viaje->load('cliente', 'unidad', 'operador','entregas');
 
 
 

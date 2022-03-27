@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\EvidenciaCaseta;
+use App\Models\Factura;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EvidenciaCasetaFactory extends Factory
+class FacturaFactory extends Factory
 {
-    protected $model = EvidenciaCaseta::class;
+    protected $model = Factura::class;
 
     public function definition(): array
     {

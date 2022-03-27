@@ -53,7 +53,7 @@ class Viaje extends Model
 
     protected $fillable = [
         'nombre_viaje',
-        'cliente_id',
+        'destino',
         'unidad_id',
         'operador_id',
         'estado',
@@ -63,11 +63,6 @@ class Viaje extends Model
         'updated_at',
         'deleted_at',
     ];
-
-    public function cliente()
-    {
-        return $this->belongsTo(Cliente::class, 'cliente_id');
-    }
 
     public function unidad()
     {
@@ -90,5 +85,10 @@ class Viaje extends Model
 
     public function casetas(){
         return $this->hasMany(EvidenciaCaseta::class);
+    }
+
+    public function facturas()
+    {
+        return $this->hasManyThrough(Factura::class, Entrega::class);
     }
 }

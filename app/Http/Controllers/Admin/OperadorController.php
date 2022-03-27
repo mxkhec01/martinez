@@ -47,6 +47,7 @@ class OperadorController extends Controller
 
     public function update(UpdateOperadorRequest $request, Operador $operador)
     {
+
         $operador->update($request->all());
 
         return redirect()->route('admin.operadors.index');

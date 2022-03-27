@@ -13,7 +13,7 @@ class ExtraPruebaSeeder extends Seeder
 {
     public function run()
     {
-        
+
         $clientes = Cliente::factory(10)->create();
 
         $unidades =  Unidad::factory(40)->create();
@@ -22,12 +22,12 @@ class ExtraPruebaSeeder extends Seeder
 
         $viajes   = Viaje::factory(100)
             ->make()
-            ->each(function($viaje) use ($clientes, $unidades, $operadores) {
-                $viaje->cliente_id = $clientes->random()->id;
+            ->each(function($viaje) use ( $unidades, $operadores) {
+
                 $viaje->unidad_id = $unidades->random()->id;
                 $viaje->operador_id = $operadores->random()->id;
                 $viaje->save();
-            } ) ;  
+            } ) ;
 
         $anticipos = AnticiposViaje::factory(80)
             ->make()
@@ -35,6 +35,6 @@ class ExtraPruebaSeeder extends Seeder
                 $anticipo->viaje_id = $viajes->random()->id;
                 $anticipo->save();
             } );
-        
+
     }
 }

@@ -17,11 +17,10 @@ class UpdateViajeRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre_viaje' => [
-                'string',
-                'nullable',
-            ],
             'estado' => [
+                'required',
+            ],
+            'destino' => [
                 'required',
             ],
         ];

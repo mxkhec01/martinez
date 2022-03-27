@@ -25,6 +25,7 @@ class StoreEntregaRequest extends FormRequest
                 'date_format:' . config('panel.date_format'),
                 'nullable',
             ],
+            'cliente_id' => ['required'],
         ];
     }
 }

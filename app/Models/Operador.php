@@ -7,11 +7,14 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Operador extends Model
+class Operador extends Authenticatable
 {
     use SoftDeletes;
     use HasFactory;
+    use HasApiTokens;
 
     public $table = 'operadors';
 
@@ -81,5 +84,14 @@ class Operador extends Model
     public function viajes()
     {
         return $this->hasMany(Viaje::class);
+    }
+
+    public function setPasswordAttribute($input)
+    {
+        if ($input) {
+//            $this->attributes['password'] = app('hash')->needsRehash($input) ? Hash::make($input) : $input;
+
+            $this->attributes['password'] = md5($input);
+        }
     }
 }

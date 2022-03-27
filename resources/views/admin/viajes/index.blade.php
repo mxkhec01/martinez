@@ -45,10 +45,7 @@
                             {{ trans('cruds.viaje.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.viaje.fields.nombre_viaje') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.viaje.fields.cliente') }}
+                            Destino
                         </th>
                         <th>
                             {{ trans('cruds.viaje.fields.unidad') }}
@@ -69,19 +66,12 @@
                     <tr>
                         <td>
                         </td>
+
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                        </td>
-                        <td>
-                            <select class="search">
-                                <option value>{{ trans('global.all') }}</option>
-                                @foreach($clientes as $key => $item)
-                                    <option value="{{ $item->razon_social }}">{{ $item->razon_social }}</option>
-                                @endforeach
-                            </select>
                         </td>
                         <td>
                             <select class="search">
@@ -123,10 +113,7 @@
                                 {{ $viaje->id ?? '' }}
                             </td>
                             <td>
-                                {{ $viaje->nombre_viaje ?? '' }}
-                            </td>
-                            <td>
-                                {{ $viaje->cliente->razon_social ?? '' }}
+                                {{ $viaje->destino ?? '' }}
                             </td>
                             <td>
                                 {{ $viaje->unidad->codigo ?? '' }}

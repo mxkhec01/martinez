@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\EvidenciaCaseta;
+use EvidenciaCaseta;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class EvidenciaCasetaFactory extends Factory
+class casetasFactory extends Factory
 {
     protected $model = EvidenciaCaseta::class;
 

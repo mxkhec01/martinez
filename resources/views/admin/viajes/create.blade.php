@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.viajes.store") }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('admin.viajes.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="nombre_viaje">{{ trans('cruds.viaje.fields.nombre_viaje') }}</label>
@@ -19,6 +19,17 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.viaje.fields.nombre_viaje_helper') }}</span>
             </div>
+
+        <div class="form-group">
+            <label for="nombre_viaje">{{ trans('cruds.viaje.fields.nombre_viaje') }}</label>
+            <input class="form-control {{ $errors->has('nombre_viaje') ? 'is-invalid' : '' }}" type="text" name="nombre_viaje" id="nombre_viaje" value="{{ old('nombre_viaje', '') }}">
+            @if($errors->has('nombre_viaje'))
+            <div class="invalid-feedback">
+                {{ $errors->first('nombre_viaje') }}
+            </div>
+            @endif
+            <span class="help-block">{{ trans('cruds.viaje.fields.nombre_viaje_helper') }}</span>
+        </div>
             <div class="form-group">
                 <label for="cliente_id">{{ trans('cruds.viaje.fields.cliente') }}</label>
                 <select class="form-control select2 {{ $errors->has('cliente') ? 'is-invalid' : '' }}" name="cliente_id" id="cliente_id">
