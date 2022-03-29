@@ -32,11 +32,13 @@ class AnticiposViajeController extends Controller
         return view('admin.anticiposViajes.create', compact('viajes'));
     }
 
-    public function store(StoreAnticiposViajeRequest $request)
+    public function store(StoreAnticiposViajeRequest $request,  $viaje)
     {
-        $anticiposViaje = AnticiposViaje::create($request->all());
+        $anticiposViaje = $viaje->anticipos()->create($request->all());
+        
+        
 
-        return redirect()->route('admin.anticipos-viajes.index');
+        return redirect()->back()->with('message', 'Anticipo creado con éxito');
     }
 
     public function edit(AnticiposViaje $anticiposViaje)

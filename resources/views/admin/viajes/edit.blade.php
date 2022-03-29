@@ -92,6 +92,10 @@
 
     @endcan
 
+    @can('entrega_create')
+        @include('admin.anticiposViajes.create')
+    @endcan
+
         <div class="card">
             <h5 class="card-header">
                 <a data-toggle="collapse" href="#lista-entregas" aria-expanded="true" aria-controls="lista-entregas"

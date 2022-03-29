@@ -69,7 +69,7 @@
 <script language='javascript' type='text/javascript'>
       $(document).ready(function(){
       $('.table-fixed-header').fixedHeader();
-      topOffset: 100
+      topOffset: 500
 
       });
     </script>

@@ -17,6 +17,7 @@
         "postcss": "^8.4.12"
     },
     "dependencies": {
+        "mix": "^0.0.1",
         "popper.js": "^1.16.1"
     }
 }

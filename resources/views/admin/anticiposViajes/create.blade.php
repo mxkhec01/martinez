@@ -1,7 +1,12 @@
-@extends('layouts.admin')
-@section('content')
-
 <div class="card">
+    <h5 class="card-header">
+        <a data-toggle="collapse" href="#collapse-example" aria-expanded="false" aria-controls="collapse-example" id="heading-example" class="d-block collapsed">
+            <i class="fa fa-chevron-down pull-right"></i>
+            Crear nueva entrega
+        </a>
+    </h5>
+    <div id="collapse-example" class="collapse" aria-labelledby="heading-example">
+
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.anticiposViaje.title_singular') }}
     </div>
@@ -11,11 +16,6 @@
             @csrf
             <div class="form-group">
                 <label class="required" for="viaje_id">{{ trans('cruds.anticiposViaje.fields.viaje') }}</label>
-                <select class="form-control select2 {{ $errors->has('viaje') ? 'is-invalid' : '' }}" name="viaje_id" id="viaje_id" required>
-                    @foreach($viajes as $id => $entry)
-                        <option value="{{ $id }}" {{ old('viaje_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                    @endforeach
-                </select>
                 @if($errors->has('viaje'))
                     <div class="invalid-feedback">
                         {{ $errors->first('viaje') }}
@@ -61,7 +61,4 @@
         </form>
     </div>
 </div>
-
-
-
-@endsection
+</div>

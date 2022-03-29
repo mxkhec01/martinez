@@ -78,6 +78,10 @@ class Viaje extends Model
         return $this->hasMany(Entrega::class);
     }
 
+    public function anticipos(){
+        return $this->hasMany(AnticiposViaje::class);
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
