@@ -10,6 +10,8 @@ Route::post('/login',[\App\Http\Controllers\UsuarioController::class,'login']);
 Route::group(['middleware'=>['auth:sanctum']], function() {
     Route::get('viajes/{id}', [\App\Http\Controllers\UsuarioController::class,'obten_viajes']);
     Route::post('/logout',[\App\Http\Controllers\UsuarioController::class,'logout']);
+    Route::post('sube-restaurante', [\App\Http\Controllers\SubeImagenesController::class, 'subeRestaurante']);
+    Route::post('sube-caseta', [\App\Http\Controllers\SubeImagenesController::class,'subeCaseta']);
 });
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:sanctum']], function () {

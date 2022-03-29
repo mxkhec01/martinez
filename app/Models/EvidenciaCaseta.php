@@ -10,6 +10,14 @@ class EvidenciaCaseta extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'viaje_id',
+        'monto',
+        'lugar',
+        'observaciones',
+        'foto_url',
+        'numero_interno',
+    ];
 
     public function viaje(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

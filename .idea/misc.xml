@@ -4,40 +4,32 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="2699" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/viajes/index.blade.php" />
+          <option name="caretOffset" value="1486" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/UsuarioController.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="386" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Requests/StoreViajeRequest.php" />
+          <option name="caretOffset" value="175" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/.env" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="888" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/database/factories/ViajeFactory.php" />
+          <option name="caretOffset" value="660" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/routes/api.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="185" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/viajes/edit.blade.php" />
+          <option name="caretOffset" value="404" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/EvidenciaCaseta.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="9823" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/lang/es/cruds.php" />
+          <option name="caretOffset" value="221" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/Entrega.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="2156" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ViajeController.php" />
+          <option name="caretOffset" value="141" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/database/migrations/2022_03_25_204856_create_evidencia_casetas_table.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="2792" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ViajeController_cliente.php" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="2328" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/entregas/create.blade.php" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="152" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Requests/StoreEntregaRequest.php" />
+          <option name="caretOffset" value="2342" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/SubeImagenesController.php" />
         </OpenedFileInfo>
       </list>
     </option>
