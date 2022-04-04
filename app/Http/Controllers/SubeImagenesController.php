@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use File;
+use Str;
 
 class SubeImagenesController extends Controller
 {
@@ -60,21 +61,35 @@ class SubeImagenesController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $viaje)
     {
-        //
+        $caseta= EvidenciaCaseta::where("viaje_id",$viaje)
+                   ->where("numero_interno",$id)
+                   ->first();
+        if($caseta){
+            $caseta->delete();
+            $response = [
+                'OK' => 'Registro eliminado'
+            ];
+            return response($response,200);
+        }
+
+        $response = [
+            'Error' => 'No se encontró el registro'
+        ];
+        return response($response,200);
+
+        
     }
 
+    
+    public function subeCaseta(Request $request){
 
-
-    public function subeCaseta(Request $request)
-    {
         $validator = Validator::make($request->all(), [
-            'image' => 'image:jpeg,png,jpg,gif,svg|max:2048',
             'viaje' =>  'required',
             'caseta' => 'required',
-
         ]);
+
         if ($validator->fails()) {
 
             $response = [
@@ -83,76 +98,54 @@ class SubeImagenesController extends Controller
             return response($response, 500);
         }
 
-        if($request['image']){
+         //Se busca la caseta para ver si es inserción o actualización
+         $caseta = EvidenciaCaseta::where('viaje_id',$request['viaje'])->where('numero_interno',$request['caseta'])->first();
 
-      
-        $uploadFolder = 'casetas';
-        $image = $request->file('image');
-        $image_uploaded_path = $image->store($uploadFolder, 'public');
+         //Se crea la nueva instancia en caso de que no exista
+         if(!$caseta){
+             $caseta = new EvidenciaCaseta();
+             $caseta->viaje_id = $request['viaje'];
+             $caseta->numero_interno = $request['caseta'];
+         }
+
+         $response="";
+
+        if ($request->hasFile('image')){
+            $this->validate($request,[  'image' => 'required|file|image|mimes:jpeg,png,gif,svg' ]); 
+            $name = $request->file('image');
+            $response = Storage::disk('public')->put('casetas',$name);
         
-        $url_foto = $image_uploaded_path;
-        $base =  basename($image_uploaded_path);     
+            //return response()->json([ 'message'=>'File uploaded', 'data'=> ['file'=>$response] ]); 
+
+        }else{
+
+            $name = '/casetas/'.$request['viaje'].'_'.$request['caseta'].".".Str::random(15)."."."png"; 
+            $response = Storage::disk('public')->put($name, base64_decode($request->input('image')),'public'); 
+           // return response()->json([ 'message'=>'Archivo Creado', 'data'=> ['file'=>$response] ]); 
 
         }
+        
 
-        $caseta = EvidenciaCaseta::where('viaje_id',$request['viaje'])->where('numero_interno',$request['caseta'])->first();
 
-        if(!$caseta){
-            $caseta = new EvidenciaCaseta();
-            $caseta->viaje_id = $request['viaje'];
-            $caseta->numero_interno = $request['caseta'];
+        if(File::exists(public_path("storage/".$caseta->foto_url))){
+            File::delete(public_path("storage/".$caseta->foto_url));
         }
+
         $caseta->monto = $request['monto'] ?? '';
-
-        if(!$request['image']) { 
-            $response = [ "Estado" => "Registro actualizado" ]; 
-        } else {
-            if(File::exists(public_path("storage/".$caseta->foto_url))){
-                File::delete(public_path("storage/".$caseta->foto_url));
-            }
-           
-            $caseta->foto_url = $url_foto ;
-            $response = [
-                "image_name" => $base,
-                "image_url" => $url_foto,
-                "mime" => $image->getClientMimeType()
-            ];
-        }
+        $caseta->foto_url = $name ;
         $caseta->observaciones = $request['observaciones'] ?? '';
         $caseta->lugar = $request['lugar'] ?? '';
         $caseta->save();
 
 
-        return response($response, 200);
+
+        return response()->json([ 'message'=>'Archivo Creado', 'data'=> ['file'=>$name] ]); 
+
+
+
     }
 
-    public function subeRestaurante(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'image' => 'image:jpeg,png,jpg,gif,svg|max:2048',
-            'viaje' =>  'required',
 
-        ]);
-        if ($validator->fails()) {
-
-            $response = [
-                'Error' => $validator->messages()->first()
-            ];
-            return response($response, 500);
-        }
-        $uploadFolder = 'casetas';
-        $image = $request->file('image');
-        $image_uploaded_path = $image->store($uploadFolder, 'public');
-        $
-
-        $response = [
-            "image_name" => basename($image_uploaded_path),
-            "image_url" => Storage::disk('public')->url($image_uploaded_path),
-            "mime" => $image->getClientMimeType()
-        ];
-
-
-        return response($response, 200);
-    }
+  
 
 }
