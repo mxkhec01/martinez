@@ -83,28 +83,40 @@
                                 {{ $cliente->ciudad ?? '' }}
                             </td>
                             <td>
-                                @can('cliente_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.clientes.show', $cliente->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                @endcan
+                                <div class="dropdown text-center">
+                                        <a class="dropdown-button" id="dropdown-menu-{{ $cliente->id }}" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown-menu-{{ $cliente->id }}">
+                                    @can('cliente_show')
+                                        <a class="dropdown-item float-right"
+                                        href="{{ route('admin.clientes.show', $cliente->id) }}">                                            
+                                            <i class="fas fa-user-tie"  style="width: 50px;"></i>
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
 
-                                @can('cliente_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.clientes.edit', $cliente->id) }}">
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
+                                    @can('cliente_edit')
+                                        <a class="dropdown-item" href="{{ route('admin.clientes.edit', $cliente->id) }}">
+                                            <i class="fas fa-edit" style="width: 50px;"></i>
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
 
-                                @can('cliente_delete')
-                                    <form action="{{ route('admin.clientes.destroy', $cliente->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
-                                @endcan
+                                    @can('cliente_delete')
+                                            <form id="delete-{{ $cliente->id }}" action="{{ route('admin.clientes.destroy', $cliente->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                            </form>
+                                            <a class="dropdown-item" href="#" onclick="if(confirm('{{ trans('global.areYouSure') }}')) document.getElementById('delete-{{ $cliente->id }}').submit()">
+                                                <i class="fa fa-trash" style="width: 50px;"> </i>
+                                                {{ trans('global.delete') }}
+                                            </a>
 
+                                    @endcan
+                                    </div>
+                                </div>
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>
@@ -113,7 +125,24 @@
     </div>
 </div>
 
-
+@section('styles')
+    <style>
+        .dataTables_scrollBody, .dataTables_wrapper {
+            position: static !important;
+        }
+        .dropdown-button {
+            cursor: pointer;
+            font-size: 2em;
+            display:block
+        }
+        .dropdown-menu i {
+            font-size: 1.33333333em;
+            line-height: 0.75em;
+            vertical-align: -15%;
+            color: #000;
+        }
+    </style>
+@endsection
 
 @endsection
 @section('scripts')
