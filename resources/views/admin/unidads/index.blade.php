@@ -57,19 +57,19 @@
                             <td>
 
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $unidad->id ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $unidad->codigo ?? '' }}
                             </td>
                             <td>
                                 {{ $unidad->nombre ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $unidad->placas ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $unidad->tipo_unidad ?? '' }}
                             </td>
                             <td>

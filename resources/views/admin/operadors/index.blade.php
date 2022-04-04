@@ -76,25 +76,25 @@
                             <td>
 
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->id ?? '' }}
                             </td>
                             <td>
                                 {{ $operador->nombre ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->fecha_nacimiento ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->fecha_ingreso ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->licencia ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->vence ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->tipo_licencia ?? '' }}
                             </td>
                             <td>
@@ -106,10 +106,10 @@
                             <td>
                                 {{ $operador->curp ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->tarjeta_bancaria ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->banco ?? '' }}
                             </td>
                             <td>

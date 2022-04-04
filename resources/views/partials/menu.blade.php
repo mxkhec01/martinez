@@ -2,7 +2,7 @@
 
     <div class="c-sidebar-brand d-md-down-none">
         <a class="c-sidebar-brand-full h4" href="#">
-            {{ trans('panel.site_title') }}
+            <img src="img/Logo.png" class="mx-auto d-block" style="max-width: 90%; max-height: 90%;">
         </a>
     </div>
 

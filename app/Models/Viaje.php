@@ -24,7 +24,7 @@ class Viaje extends Model
     ];
 
     public const ESTADO_BACKGROUND = [
-        'activo'     => 'bg-primary',
+        'activo'     => 'activo',
         'revision'   => 'bg-danger',
         'asignar'    => 'bg-warning',
         'finalizado' => 'bg-info',

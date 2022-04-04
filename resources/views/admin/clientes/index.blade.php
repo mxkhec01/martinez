@@ -58,7 +58,7 @@
                             <td>
 
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $cliente->id ?? '' }}
                             </td>
                             <td>
@@ -67,13 +67,13 @@
                             <td>
                                 {{ $cliente->calle ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $cliente->numero_exterior ?? '' }}
                             </td>
                             <td>
                                 {{ $cliente->colonia ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $cliente->codigo_postal ?? '' }}
                             </td>
                             <td>

@@ -28,16 +28,16 @@
                                 <div class="col-sm-6 col-lg-3">
                                     <div @class([
                                         'card',
-                                        'text-white',
+                                        'text-white',                                        
                                         App\Models\Viaje::ESTADO_BACKGROUND[$y->estado] ?? '',
                                         'mb-3',
                                     ]) style="max-width: 18rem;">
-                                        <div class="card-header">
-                                            <h2 class="card-text text-left">{{ $y->numero ?? '' }}<a
-                                                    href="{{ route('admin.viajes.mostrar',['valor' => $y->estado]) }}" class="btn float-right text-white">Lista</a>
+                                        <div @class(['card-header', App\Models\Viaje::ESTADO_BACKGROUND[$y->estado] ?? '', ])>
+                                            <h2 class="card-text text-left">{{ $y->numero ?? '' }}
+                                                <a href="{{ route('admin.viajes.mostrar',['valor' => $y->estado]) }}" class="btn float-right text-white">Lista</a>
                                             </h2>
                                         </div>
-                                        <div class="card-body ">
+                                        <div class="card-body align-items-center d-flex justify-content-center">
                                             <h1 class="text-center">
                                                 {{ App\Models\Viaje::ESTADO_SELECT[$y->estado] ?? '' }}</h1>
                                         </div>
@@ -51,12 +51,14 @@
                         </div>
                         <!-- /.row-->
 
-                        <div class="row pb-4">
-
-                                {{-- Widget - latest entries --}}
-                                <div class="{{ $settings1['column_class'] }}"  style="overflow-x: auto; height: 20rem; overflow-y: auto" >
+                        <div class="row pb-4 mt-2">
+                            <div class="col-md-6 col-sm-12 col-12">
+                                <div class="table-title mb-4">
                                     <h3>{{ $settings1['chart_title'] }}</h3>
-                                    <table class="table table-bordered table-striped"  >
+                                </div>
+                                {{-- Widget - latest entries --}}
+                                <div class="col-12"  style="overflow-x: auto; height: 20rem; overflow-y: auto" >
+                                    <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 @foreach ($settings1['fields'] as $key => $value)
@@ -93,10 +95,12 @@
                                         </tbody>
                                     </table>
                                 </div>
-
-
-                                <div class="{{ $settings2['column_class'] }}" style="overflow-x: auto; height: 20rem; overflow-y: auto">
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-12">
+                                <div class="table-title mb-4">
                                     <h3>{{ $settings2['chart_title'] }}</h3>
+                                </div>
+                                <div class="col-12" style="overflow-x: auto; height: 20rem; overflow-y: auto">
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -134,44 +138,68 @@
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
 
                         </div>{{-- fin del row --}}
                         <div class="row pb-4">
-                            <div class="card col-md-6">
-                                <div class="card-header">Pagos últimos 21 días
-                                <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">docs</small></a></div>
-                                </div>
-                                <div class="card-body">
-                                <div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="canvas-1" width="469" height="234" style="display: block; width: 469px; height: 234px;" class="chartjs-render-monitor"></canvas>
-                                </div>
-                                </div>
+                            <div class="col-md-6">
+                                <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand"></div>
+                                <div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                <canvas id="canvas-1" class="chartjs-render-monitor"></canvas>
                             </div>
-                            <div class="card col-md-6">
+                            <!-- <div class="col-md-6" style="padding-right: 10px;">
+                                <div class="card">
+                                    <div class="card-header">Pagos últimos 21 días
+                                    <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank">
+                                        <small class="text-muted">docs</small></a></div>
+                                    </div>
+                                    <div class="card-body">
+                                    
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="col-md-6">
+                                <div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                    <canvas id="canvas-2" class="chartjs-render-monitor"></canvas>
+                                </div>
+                            <!-- <div class="card">
                                 <div class="card-header">Uso unidades últimas 3 semanas
                                 <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">docs</small></a></div>
                                 </div>
                                 <div class="card-body">
-                                <div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="canvas-2" width="469" height="234" style="display: block; width: 469px; height: 234px;" class="chartjs-render-monitor"></canvas>
+                                
                                 </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>{{-- fin del row --}}
-                        <div class="row pb-4">
-                            <div class="card col-md-6">
-                                <div class="card-header">Pagos últimos 21 días
-                                <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">docs</small></a></div>
+                    </div>  
+                    <div class="row mt-2">
+                        <div class="col-12">
+                                <div class="c-chart-wrapper" style="height: 300px">
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <canvas id="canvas-3" class=""></canvas>
                                 </div>
-                                <div class="card-body">
-                                <div class="c-chart-wrapper"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                    <canvas id="canvas-3" width="469" height="234" style="display: block; width: 469px; height: 234px;" class="chartjs-render-monitor"></canvas>
-                                </div>
-                                </div>
-                            </div>
-                        </div>{{-- fin del row --}}
+                                <!-- <div class="card col-md-6">
+                                    <div class="card-header">Pagos últimos 21 días
+                                    <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">docs</small></a></div>
+                                    </div>
+                                    <div class="card-body">
+                                    
+                                    </div>
+                                </div> -->
+                                <div>
+                            </div>{{-- fin del row --}}
+                        </div>
                     </div>
-                </div>
+                                  
             </div>
         </div>
     </div>
@@ -182,13 +210,13 @@
 <script src="{{ asset('js/coreui-chartjs.bundle.js') }}"></script>
 {{-- <script src="{{ asset('js/charts.js') }}"></script> --}}
 <script>
-const lineChart = new Chart(document.getElementById('canvas-1'), {
+    Chart.defaults.global.legend.display = false;
+    const lineChart = new Chart(document.getElementById('canvas-1'), {
     type: 'line',
     data: {
       labels : <?php echo $dias; ?>,
       datasets : [
-        {
-          label: 'Pagos por día',
+        {          
           backgroundColor : 'rgba(220, 220, 220, 0.2)',
           borderColor : 'rgba(220, 220, 220, 1)',
           pointBackgroundColor : 'rgba(220, 220, 220, 1)',
@@ -198,7 +226,11 @@ const lineChart = new Chart(document.getElementById('canvas-1'), {
       ]
     },
     options: {
-      responsive: true
+        responsive: true,
+        title: {
+            display: true,
+            text: 'PAGOS POR DIA'
+        },
     }
   })
 
@@ -218,7 +250,11 @@ const lineChart = new Chart(document.getElementById('canvas-1'), {
       ]
     },
     options: {
-      responsive: true
+        responsive: true,
+        title: {
+                display: true,
+                text: 'VIAJES POR UNIDAD'
+            }
     }
   })
   const lineChart3 = new Chart(document.getElementById('canvas-3'), {
@@ -237,7 +273,12 @@ const lineChart = new Chart(document.getElementById('canvas-1'), {
       ]
     },
     options: {
-      responsive: true
+      responsive: true,
+      maintainAspectRatio: false,
+      title: {
+                display: true,
+                text: 'ANTICIPOS POR DIA'
+            }
     }
   })
 </script>
