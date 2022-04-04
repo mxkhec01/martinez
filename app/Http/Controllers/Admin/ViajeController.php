@@ -22,12 +22,12 @@ class ViajeController extends Controller
 
         $viajes = Viaje::with([ 'unidad', 'operador'])->get();
 
-
+        $clientes = Cliente::get();
         $unidads = Unidad::get();
 
         $operadors = Operador::get();
 
-        return view('admin.viajes.index', compact( 'operadors', 'unidads', 'viajes'));
+        return view('admin.viajes.index', compact( 'operadors', 'unidads', 'viajes', 'clientes' ));
     }
 
     public function mostrar($valor)
@@ -51,11 +51,14 @@ class ViajeController extends Controller
     public function create()
     {
         abort_if(Gate::denies('viaje_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $clientes = Cliente::pluck('razon_social','id')->prepend(trans('global.pleaseSelect'), '');
+
         $unidads = Unidad::pluck('codigo', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $operadors = Operador::pluck('nombre', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.viajes.create', compact( 'operadors', 'unidads'))->with(['valor'=>'todo',]);
+        return view('admin.viajes.create', compact( 'operadors', 'unidads','clientes'))->with(['valor'=>'todo',]);
     }
 
     public function store(StoreViajeRequest $request)

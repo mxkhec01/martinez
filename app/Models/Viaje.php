@@ -91,6 +91,10 @@ class Viaje extends Model
         return $this->hasMany(EvidenciaCaseta::class);
     }
 
+    public function combustibles(){
+        return $this->hasMany(EvidenciaCombustible::class);
+    }
+
     public function facturas()
     {
         return $this->hasManyThrough(Factura::class, Entrega::class);
