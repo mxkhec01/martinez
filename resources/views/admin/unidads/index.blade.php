@@ -57,22 +57,22 @@
                             <td>
 
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $unidad->id ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $unidad->codigo ?? '' }}
                             </td>
                             <td>
                                 {{ $unidad->nombre ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $unidad->placas ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $unidad->tipo_unidad ?? '' }}
                             </td>
-                            <td>
+                            <!-- <td>
                                 @can('unidad_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.unidads.show', $unidad->id) }}">
                                         {{ trans('global.view') }}
@@ -93,8 +93,41 @@
                                     </form>
                                 @endcan
 
-                            </td>
+                            </td> -->
+                            <td>
+                            <div class="dropdown text-center">
+                                        <a class="dropdown-button" id="dropdown-menu-{{ $unidad->id }}" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown-menu-{{ $unidad->id }}">
+                                    @can('cliente_show')
+                                        <a class="dropdown-item float-right"
+                                        href="{{ route('admin.unidads.show', $unidad->id) }}">                                            
+                                            <i class="fas fa-user-tie"  style="width: 50px;"></i>
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
 
+                                    @can('cliente_edit')
+                                        <a class="dropdown-item" href="{{ route('admin.unidads.edit', $unidad->id) }}">
+                                            <i class="fas fa-edit" style="width: 50px;"></i>
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('cliente_delete')
+                                            <form id="delete-{{ $unidad->id }}" action="{{ route('admin.unidads.destroy', $unidad->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                            </form>
+                                            <a class="dropdown-item" href="#" onclick="if(confirm('{{ trans('global.areYouSure') }}')) document.getElementById('delete-{{ $unidad->id }}').submit()">
+                                                <i class="fa fa-trash" style="width: 50px;"> </i>
+                                                {{ trans('global.delete') }}
+                                            </a>
+
+                                    @endcan
+                                </div>
+                                </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -103,6 +136,24 @@
     </div>
 </div>
 
+@section('styles')
+    <style>
+        .dataTables_scrollBody, .dataTables_wrapper {
+            position: static !important;
+        }
+        .dropdown-button {
+            cursor: pointer;
+            font-size: 2em;
+            display:block
+        }
+        .dropdown-menu i {
+            font-size: 1.33333333em;
+            line-height: 0.75em;
+            vertical-align: -15%;
+            color: #000;
+        }
+    </style>
+@endsection
 
 
 @endsection

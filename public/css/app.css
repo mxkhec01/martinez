@@ -1,3 +1,33 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,700);
+@import url(https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=BenchNine:wght@300;400;700&display=swap);
+
+@media (min-width:800px) { 
+.card-body {
+    min-height: 220px !important;
+    vertical-align: middle;
+}
+}
+
+@media (max-width:999px) { 
+    .card-body {
+        min-height: 150px !important;
+        vertical-align: middle;
+    }
+}
+
+@media (min-width:1000px) { 
+    .card-body {
+        min-height: 180px !important;
+        vertical-align: middle;
+    }
+}
+
+.table-title {
+    text-align: center;
+}
+
 .card-header .fa {
     transition: .3s transform ease-in-out;
 }
@@ -5,5 +35,30 @@
     transform: rotate(90deg);
 }
 
+.card-body-dashboard {
+    min-height: 180px !important;    
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.table-title {
+    font-family: 'BenchNine', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+thead {
+    font-family: 'Oswald'; 
+    text-align: center;
+    font-size: medium;
+}
+
+tbody {
+    font-family: 'Noto Sans Display';     
+}
+
+.activo {
+    background-color: #9CC545!important;
+}
 

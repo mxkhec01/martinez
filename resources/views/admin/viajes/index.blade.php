@@ -4,15 +4,13 @@
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 <a class="btn btn-success" href="{{ route('admin.viajes.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.viaje.title_singular') }}
+                    Agregar Viaje
                 </a>
             </div>
         </div>
     @endcan
     <div class="card">
         <div class="card-header">
-
-            {{  $valor= $valor ?? 'todo' }}
             @if($valor == 'todo')
                 Viajes en cualquier estado
             @else
@@ -129,45 +127,45 @@
                             </td>
                             <td>
                                 <div class="dropdown text-center">
-                                    <a class="dropdown-button" id="dropdown-menu-{{ $viaje->id }}" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdown-menu-{{ $viaje->id }}">
-                                @can('viaje_show')
-                                    <a class="dropdown-item float-right"
-                                       href="{{ route('admin.viajes.show', $viaje->id) }}">
-                                        <i class="fa fa-truck fa-lg" style="width: 50px;"></i>
-                                        Entregas
-                                    </a>
-                                @endcan
-                                @can('viaje_show')
-                                    <a class="dropdown-item"
-                                       href="{{ route('admin.viajes.gastos', $viaje->id) }}">
-                                        <i class="fa fa-eye" style="width: 50px;"></i>
-                                        Ver gastos
-                                    </a>
-                                @endcan
-
-                                @can('viaje_edit')
-                                    <a class="dropdown-item" href="{{ route('admin.viajes.edit', $viaje->id) }}">
-                                        <i class="fas fa-edit" style="width: 50px;"></i>
-                                        {{ trans('global.edit') }}
-                                    </a>
-                                @endcan
-
-                                @can('viaje_delete')
-
-                                        <form id="delete-{{ $viaje->id }}" action="{{ route('admin.viajes.destroy', $viaje->id) }}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                        </form>
-                                        <a class="dropdown-item" href="#" onclick="if(confirm('{{ trans('global.areYouSure') }}')) document.getElementById('delete-{{ $viaje->id }}').submit()">
-                                            <i class="fa fa-trash" style="width: 50px;"> </i>
-                                            {{ trans('global.delete') }}
+                                        <a class="dropdown-button" id="dropdown-menu-{{ $viaje->id }}" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v"></i>
                                         </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown-menu-{{ $viaje->id }}">
+                                    @can('viaje_show')
+                                        <a class="dropdown-item float-right"
+                                        href="{{ route('admin.viajes.show', $viaje->id) }}">
+                                            <i class="fa fa-truck fa-lg" style="width: 50px;"></i>
+                                            Entregas
+                                        </a>
+                                    @endcan
+                                    @can('viaje_show')
+                                        <a class="dropdown-item"
+                                        href="{{ route('admin.viajes.gastos', $viaje->id) }}">
+                                            <i class="fa fa-eye" style="width: 50px;"></i>
+                                            Ver gastos
+                                        </a>
+                                    @endcan
 
-                                @endcan
-                                </div>
+                                    @can('viaje_edit')
+                                        <a class="dropdown-item" href="{{ route('admin.viajes.edit', $viaje->id) }}">
+                                            <i class="fas fa-edit" style="width: 50px;"></i>
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('viaje_delete')
+
+                                            <form id="delete-{{ $viaje->id }}" action="{{ route('admin.viajes.destroy', $viaje->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                            </form>
+                                            <a class="dropdown-item" href="#" onclick="if(confirm('{{ trans('global.areYouSure') }}')) document.getElementById('delete-{{ $viaje->id }}').submit()">
+                                                <i class="fa fa-trash" style="width: 50px;"> </i>
+                                                {{ trans('global.delete') }}
+                                            </a>
+
+                                    @endcan
+                                    </div>
                                 </div>
 
                             </td>

@@ -63,6 +63,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('viajes/gastos/{viaje}','ViajeController@gastos')->name('viajes.gastos');
     Route::resource('viajes', 'ViajeController');
     Route::resource('viajes.entregas', 'EntregaController');
+    Route::resource('viajes.anticipos-viajes', 'AnticiposViajeController');
 
 
     // Torre de control

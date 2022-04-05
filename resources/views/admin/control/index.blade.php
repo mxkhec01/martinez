@@ -40,7 +40,7 @@
             <tr onclick="window.location='{{ route('admin.viajes.show', [$viaje] ) }}'" style="cursor: pointer;">
                 <th scope="row">{{ $viaje->id }}</th>
                 <td>{{  $viaje->destino }}</td>
-                <td>{{  $viaje->operador->nombre }}</td>
+                <td>{{  $viaje->operador->nombre ?? '' }}  </td>
                 <td>{{  $viaje->unidad->codigo }}</td>
                 <td>{{  $viaje->updated_at }}</td>
 

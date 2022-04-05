@@ -76,25 +76,25 @@
                             <td>
 
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->id ?? '' }}
                             </td>
                             <td>
                                 {{ $operador->nombre ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->fecha_nacimiento ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->fecha_ingreso ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->licencia ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->vence ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->tipo_licencia ?? '' }}
                             </td>
                             <td>
@@ -106,10 +106,10 @@
                             <td>
                                 {{ $operador->curp ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->tarjeta_bancaria ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $operador->banco ?? '' }}
                             </td>
                             <td>
@@ -118,7 +118,7 @@
                             <td>
                                 {{ $operador->password ?? '' }}
                             </td>
-                            <td>
+                            <!-- <td>
                                 @can('operador_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.operadors.show', $operador->id) }}">
                                         {{ trans('global.view') }}
@@ -139,7 +139,41 @@
                                     </form>
                                 @endcan
 
-                            </td>
+                            </td> -->
+                            <td>
+                            <div class="dropdown text-center">
+                                        <a class="dropdown-button" id="dropdown-menu-{{ $operador->id }}" data-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown-menu-{{ $operador->id }}">
+                                    @can('cliente_show')
+                                        <a class="dropdown-item float-right"
+                                        href="{{ route('admin.operadors.show', $operador->id) }}">                                            
+                                            <i class="fas fa-user-tie"  style="width: 50px;"></i>
+                                            {{ trans('global.view') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('cliente_edit')
+                                        <a class="dropdown-item" href="{{ route('admin.operadors.edit', $operador->id) }}">
+                                            <i class="fas fa-edit" style="width: 50px;"></i>
+                                            {{ trans('global.edit') }}
+                                        </a>
+                                    @endcan
+
+                                    @can('cliente_delete')
+                                            <form id="delete-{{ $operador->id }}" action="{{ route('admin.operadors.destroy', $operador->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                            </form>
+                                            <a class="dropdown-item" href="#" onclick="if(confirm('{{ trans('global.areYouSure') }}')) document.getElementById('delete-{{ $operador->id }}').submit()">
+                                                <i class="fa fa-trash" style="width: 50px;"> </i>
+                                                {{ trans('global.delete') }}
+                                            </a>
+
+                                    @endcan
+                                </div>
+                                </td>
 
                         </tr>
                     @endforeach
@@ -149,6 +183,24 @@
     </div>
 </div>
 
+@section('styles')
+    <style>
+        .dataTables_scrollBody, .dataTables_wrapper {
+            position: static !important;
+        }
+        .dropdown-button {
+            cursor: pointer;
+            font-size: 2em;
+            display:block
+        }
+        .dropdown-menu i {
+            font-size: 1.33333333em;
+            line-height: 0.75em;
+            vertical-align: -15%;
+            color: #000;
+        }
+    </style>
+@endsection
 
 
 @endsection
