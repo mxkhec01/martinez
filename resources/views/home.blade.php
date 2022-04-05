@@ -141,8 +141,8 @@
                             </div>
 
                         </div>{{-- fin del row --}}
-                        <div class="row pb-4">
-                            <div class="col-md-6">
+                        <div class="row pb-4" >
+                            <div class="col-md-6" >
                                 <div class="chartjs-size-monitor">
                                 <div class="chartjs-size-monitor-expand"></div>
                                 <div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
@@ -219,14 +219,14 @@
     const lineChart = new Chart(document.getElementById('canvas-1'), {
     type: 'line',
     data: {
-      labels : <?php echo $dias; ?>,
+      labels : <?php echo $operadores; ?>,
       datasets : [
         {          
           backgroundColor : 'rgba(220, 220, 220, 0.2)',
           borderColor : 'rgba(220, 220, 220, 1)',
           pointBackgroundColor : 'rgba(220, 220, 220, 1)',
           pointBorderColor : '#fff',
-          data :<?php echo $pagos; ?>
+          data :<?php echo $monto_operadores; ?>
         }
       ]
     },
@@ -237,6 +237,15 @@
             display: true,
             text: 'PAGOS POR DIA'
         },
+        scales: {
+            xAxes: [{
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 90,
+                    minRotation: 90
+                }
+            }]
+        }
     }
   })
 
