@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EvidenciaCaseta;
 use App\Models\EvidenciaCombustible;
+use App\Models\EvidenciaOtro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -236,7 +237,8 @@ class SubeImagenesController extends Controller
 
         $validator = Validator::make($request->all(), [
             'viaje' =>  'required',
-            'caseta' => 'required',
+            'tipo' => 'required',
+            'gasto' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -248,47 +250,24 @@ class SubeImagenesController extends Controller
         }
 
          //Se busca la caseta para ver si es inserción o actualización
-         $caseta = EvidenciaCaseta::where('viaje_id',$request['viaje'])->where('numero_interno',$request['caseta'])->first();
+         $otro = EvidenciaOtro::where('viaje_id',$request['viaje'])->where('numero_interno',$request['gasto'])->where('tipo',$request['tipo'])->first();
 
          //Se crea la nueva instancia en caso de que no exista
-         if(!$caseta){
-             $caseta = new EvidenciaCaseta();
-             $caseta->viaje_id = $request['viaje'];
-             $caseta->numero_interno = $request['caseta'];
+         if(!$otro){
+             $otro = new Evidenciaotro();
+             $otro->viaje_id = $request['viaje'];
+             $otro->numero_interno = $request['gasto'];
+             $otro->tipo = $request['tipo'];
          }
 
-         $response="";
 
-        if ($request->hasFile('image')){
-            $this->validate($request,[  'image' => 'required|file|image|mimes:jpeg,png,gif,svg' ]);
-            $name = $request->file('image');
-            $response = Storage::disk('public')->put('casetas',$name);
-
-            //return response()->json([ 'message'=>'File uploaded', 'data'=> ['file'=>$response] ]);
-
-        }else{
-
-            $name = '/casetas/'.$request['viaje'].'_'.$request['caseta'].".".Str::random(15)."."."png";
-            $response = Storage::disk('public')->put($name, base64_decode($request->input('image')),'public');
-           // return response()->json([ 'message'=>'Archivo Creado', 'data'=> ['file'=>$response] ]);
-
-        }
+        $otro->monto = $request['monto'] ?? '';
+        $otro->observaciones = $request['observaciones'] ?? '';
+        $otro->save();
 
 
 
-        if(File::exists(public_path("storage/".$caseta->foto_url))){
-            File::delete(public_path("storage/".$caseta->foto_url));
-        }
-
-        $caseta->monto = $request['monto'] ?? '';
-        $caseta->foto_url = $name ;
-        $caseta->observaciones = $request['observaciones'] ?? '';
-        $caseta->lugar = $request['lugar'] ?? '';
-        $caseta->save();
-
-
-
-        return response()->json([ 'message'=>'Archivo Creado', 'data'=> ['file'=>$name] ]);
+        return response()->json([ 'message'=>'Gasto Creado', 'data'=> $otro]);
 
     }
 
