@@ -39,16 +39,16 @@
             @endphp
             <tr onclick="window.location='{{ route('admin.viajes.show', [$viaje] ) }}'" style="cursor: pointer;">
                 <th scope="row">{{ $viaje->id }}</th>
-                <td>{{  $viaje->destino }}</td>
+                <td class="d-flex justify-content-center">{{  $viaje->destino }}</td>
                 <td>{{  $viaje->operador->nombre ?? '' }}  </td>
                 <td>{{  $viaje->unidad->codigo }}</td>
                 <td>{{  $viaje->updated_at }}</td>
 
-                <td class="{{ ($num_entregas_activas == 0 && $num_total_entregas >0 ) ? "bg-success" : "bg-danger" }}">{{  $num_total_entregas }}</td>
-                <td class="bg-success">{{  $num_entregas_activas }}</td>
-                <td class="{{ ($num_entregas_activas == 0 && $num_total_entregas >0 ) ? "bg-success" : "bg-warning" }}" >{{  $num_total_entregas - $num_entregas_activas }}</td>
+                <td class="{{ ($num_entregas_activas == 0 && $num_total_entregas >0 ) ? "bg-success" : "" }}">{{  $num_total_entregas }}</td>
+                <td class="bg-warning">{{  $num_entregas_activas }}</td>
+                <td class="{{ ($num_entregas_activas == 0 && $num_total_entregas >0 ) ? "bg-success" : "bg-success" }}" >{{  $num_total_entregas - $num_entregas_activas }}</td>
                 @can('viaje_edit')
-                    <td>
+                    <td class="d-flex justify-content-center">
                         <a class="btn btn-xs btn-info" href="{{ route('admin.viajes.edit', $viaje->id) }}">
                             {{ trans('global.edit') }}
                         </a>

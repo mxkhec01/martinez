@@ -39,7 +39,7 @@
                         <th width="10">
 
                         </th>
-                        <th>
+                        <th> 
                             {{ trans('cruds.viaje.fields.id') }}
                         </th>
                         <th>
@@ -65,7 +65,7 @@
                         <td>
                         </td>
 
-                        <td>
+                        <td class="text-center" style="width: 30px">
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                         </td>
                         <td>
@@ -107,13 +107,13 @@
                             <td>
 
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $viaje->id ?? '' }}
                             </td>
                             <td>
                                 {{ $viaje->destino ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ $viaje->unidad->codigo ?? '' }}
                             </td>
                             <td>
@@ -122,7 +122,7 @@
                             <td>
                                 {{ $viaje->operador->nombre ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-center">
                                 {{ App\Models\Viaje::ESTADO_SELECT[$viaje->estado] ?? '' }}
                             </td>
                             <td>

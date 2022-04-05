@@ -176,7 +176,7 @@
                     </div>  
                     <div class="row mt-2">
                         <div class="col-12">
-                                <div class="c-chart-wrapper" style="height: 300px">
+                                <div class="c-chart-wrapper" style="height: 30rem;">
                                     <div class="chartjs-size-monitor">
                                         <div class="chartjs-size-monitor-expand">
                                             <div class=""></div>
@@ -209,11 +209,11 @@
 {{-- <script src="{{ asset('js/Chart.min.js') }}"></script> --}}
 <script src="{{ asset('js/coreui-chartjs.bundle.js') }}"></script>
 {{-- <script src="{{ asset('js/charts.js') }}"></script> --}}
-<!-- <script type="text/javascript">
-   setTimeout(function(){
-       location.reload();
-   },15000);
-</script> -->
+<script type="text/javascript">
+//    setTimeout(function(){
+//        location.reload();
+//    },15000);
+</script>
 <script>
     Chart.defaults.global.legend.display = false;
     const lineChart = new Chart(document.getElementById('canvas-1'), {
@@ -232,6 +232,7 @@
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         title: {
             display: true,
             text: 'PAGOS POR OPERADOR'
@@ -265,6 +266,7 @@
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         title: {
                 display: true,
                 text: 'VIAJES POR UNIDAD'

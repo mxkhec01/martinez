@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.operador.title_singular') }}
+        Editar Operador
     </div>
 
     <div class="card-body">
@@ -137,7 +137,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="password">{{ trans('cruds.operador.fields.password') }}</label>
-                    <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="text" name="password" id="password" value="{{ old('password', $operador->password) }}">
+                    <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="text" name="password" id="password" value="">
                     @if($errors->has('password'))
                         <div class="invalid-feedback">
                             {{ $errors->first('password') }}
