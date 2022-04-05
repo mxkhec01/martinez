@@ -77,6 +77,18 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.viaje.fields.operador_helper') }}</span>
                 </div>
+                <div class="form-group col">
+                    <label for="monto_pagado">Pago Operador</label>
+                    <input class="form-control {{ $errors->has('monto_pagado') ? 'is-invalid' : '' }}" type="text"
+                           name="monto_pagado" id="monto_pagado"
+                           value="{{ old('monto_pagado', $viaje->monto_pagado) }}">
+                    @if($errors->has('monto_pagado'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('monto_pagado') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.viaje.fields.nombre_viaje_helper') }}</span>
+                </div>
 
                 </div>
                 <div class="form-group">
@@ -128,6 +140,46 @@
                                         @endforeach
                                     </ul>
                                 </td>
+                                <td>Editar/borrar</td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h5 class="card-header">
+                <a data-toggle="collapse" href="#lista-anticipos" aria-expanded="true" aria-controls="lista-anticipos" style="text-decoration:none;"
+                   id="heading-anticipos" class="d-block">
+                    <i class="fa fa-chevron-down pull-right"></i>
+                    Lista de anticipos {{ $viaje->anticipos->count(); }} <span style="margin-left: 50px;"> @money($viaje->anticipos->sum('monto'))</span>
+                </a>
+            </h5>
+
+            <div id="lista-anticipos" class="collapse show" aria-labelledby="lista-anticipos">
+                <div class="card-body">
+                    <div class="docs-example">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Monto</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($viaje->anticipos as $anticipo)
+                            <tr>
+                                <th scope="row">{{ $anticipo->id }}</th>
+                                <td class="text-right"> @money($anticipo->monto)
+                                </td>
+                                <td>{{ $anticipo->descripcion }}</td>
+                                <td>{{ $anticipo->fecha }}</td>
                                 <td>Editar/borrar</td>
                             </tr>
                             @endforeach

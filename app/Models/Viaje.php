@@ -30,6 +30,14 @@ class Viaje extends Model
         'finalizado' => 'bg-info',
     ];
 
+    public const GASTOS_OTROS = [
+        'HOTELES'     => 'Hoteles',
+        'MISC'        => 'Misceláneos',
+        'COMIDAS'    => 'Comidas',
+        'MANIOBRAS' => 'Maniobras',
+        'OTROS' => 'Otros',
+    ];
+
     public $table = 'viajes';
 
     public $orderable = [

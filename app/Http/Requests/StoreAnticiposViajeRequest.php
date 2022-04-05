@@ -17,10 +17,7 @@ class StoreAnticiposViajeRequest extends FormRequest
     public function rules()
     {
         return [
-            'viaje_id' => [
-                'required',
-                'integer',
-            ],
+            
             'descripcion' => [
                 'string',
                 'nullable',

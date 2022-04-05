@@ -1,21 +1,16 @@
 <div class="card">
     <h5 class="card-header">
-        <a data-toggle="collapse" href="#collapse-example" aria-expanded="false" aria-controls="collapse-example" id="heading-example" class="d-block collapsed">
+        <a data-toggle="collapse" href="#collapse-anticipo" aria-expanded="false" aria-controls="collapse-anticipo" id="heading-anticipo" class="d-block collapsed">
             <i class="fa fa-chevron-down pull-right"></i>
-            Crear nueva entrega
+            Crear Anticipo
         </a>
     </h5>
-    <div id="collapse-example" class="collapse" aria-labelledby="heading-example">
-
-    <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.anticiposViaje.title_singular') }}
-    </div>
+    <div id="collapse-anticipo" class="collapse" aria-labelledby="heading-anticipo">
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.anticipos-viajes.store") }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("admin.viajes.anticipos-viajes.store",$viaje) }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label class="required" for="viaje_id">{{ trans('cruds.anticiposViaje.fields.viaje') }}</label>
                 @if($errors->has('viaje'))
                     <div class="invalid-feedback">
                         {{ $errors->first('viaje') }}

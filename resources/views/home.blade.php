@@ -234,7 +234,7 @@
         responsive: true,
         title: {
             display: true,
-            text: 'PAGOS POR DIA'
+            text: 'PAGOS POR OPERADOR'
         },
         scales: {
             xAxes: [{

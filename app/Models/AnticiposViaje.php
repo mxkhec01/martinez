@@ -42,10 +42,10 @@ class AnticiposViaje extends Model
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
     }
 
-    // public function setFechaAttribute($value)
-    // {
-    //     $this->attributes['fecha'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    // }
+    public function setFechaAttribute($value)
+     {
+         $this->attributes['fecha'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+     }
 
     protected function serializeDate(DateTimeInterface $date)
     {

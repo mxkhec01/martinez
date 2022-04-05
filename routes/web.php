@@ -72,7 +72,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Anticipos Viaje
     Route::delete('anticipos-viajes/destroy', 'AnticiposViajeController@massDestroy')->name('anticipos-viajes.massDestroy');
-    Route::resource('anticipos-viajes', 'AnticiposViajeController');
+    //Route::resource('anticipos-viajes', 'AnticiposViajeController');
 
     // Menu Agregar Viaje
     Route::delete('menu-agregar-viajes/destroy', 'MenuAgregarViajeController@massDestroy')->name('menu-agregar-viajes.massDestroy');
