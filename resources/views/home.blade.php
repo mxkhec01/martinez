@@ -176,7 +176,7 @@
                     </div>  
                     <div class="row mt-2">
                         <div class="col-12">
-                                <div class="c-chart-wrapper" style="height: 300px">
+                                <div class="c-chart-wrapper" style="height: 30rem;">
                                     <div class="chartjs-size-monitor">
                                         <div class="chartjs-size-monitor-expand">
                                             <div class=""></div>
@@ -210,9 +210,9 @@
 <script src="{{ asset('js/coreui-chartjs.bundle.js') }}"></script>
 {{-- <script src="{{ asset('js/charts.js') }}"></script> --}}
 <script type="text/javascript">
-   setTimeout(function(){
-       location.reload();
-   },15000);
+//    setTimeout(function(){
+//        location.reload();
+//    },15000);
 </script>
 <script>
     Chart.defaults.global.legend.display = false;
@@ -232,6 +232,7 @@
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         title: {
             display: true,
             text: 'PAGOS POR DIA'
@@ -256,6 +257,7 @@
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         title: {
                 display: true,
                 text: 'VIAJES POR UNIDAD'
