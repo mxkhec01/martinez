@@ -66,6 +66,7 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <script src="{{ asset('js/table-fixed-header.js') }}"></script>
+
 <script language='javascript' type='text/javascript'>
       $(document).ready(function(){
       $('.table-fixed-header').fixedHeader();

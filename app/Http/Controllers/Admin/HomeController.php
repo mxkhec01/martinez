@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Viaje;
 use App\Models\Unidad;
 use App\Models\AnticiposViaje;
+use App\Models\Operador;
 use DB;
 use Carbon\Carbon;
 
@@ -118,6 +119,19 @@ class HomeController
                 $unidades= $valor->pluck('codigo');
                 $viajesUnidad = $valor->pluck('numero');
 
+            $pagos_viajes = Operador::selectRaw('ifnull(sum(case when viajes.id is null then 0 else viajes.monto_pagado end),0) as monto, nombre')
+                ->leftJoin('viajes', function ($leftJoin) use($dias) {
+                    $leftJoin
+                        ->on('operadors.id', '=', 'viajes.operador_id')
+                        ->on('viajes.created_at','>=',DB::raw($dias[0]));
+                })
+                ->groupBy('nombre')
+                ->orderBy('monto','desc')
+                ->get();
+
+                $operadores = $pagos_viajes->pluck('nombre');
+                $monto_operadores = $pagos_viajes->pluck('monto');
+
 
 
         $pagos = json_encode($pagos,JSON_NUMERIC_CHECK);
@@ -128,7 +142,7 @@ class HomeController
         //dd($dias);
 
 
-        return view('home', compact('viajesEstatus', 'settings1','settings2','pagos','dias','unidades','viajesUnidad','anticipos'));
+        return view('home', compact('viajesEstatus', 'settings1','settings2','pagos','dias','unidades','viajesUnidad','anticipos','operadores','monto_operadores'));
 
         //return view('home');
     }
