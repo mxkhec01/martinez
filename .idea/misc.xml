@@ -8,10 +8,6 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/.env" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="759" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/routes/api.php" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
           <option name="caretOffset" value="404" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/EvidenciaCaseta.php" />
         </OpenedFileInfo>
@@ -28,8 +24,16 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/Viaje.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="7244" />
+          <option name="caretOffset" value="7464" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/SubeImagenesController.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="872" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/routes/api.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="0" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/routes/web.php" />
         </OpenedFileInfo>
       </list>
     </option>

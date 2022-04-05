@@ -180,22 +180,22 @@ class SubeImagenesController extends Controller
        if($request->has('image2')){
                     $response_2="";
                    $name_2 = '/combustibles/'.$request['viaje'].'_'.$request['tipo'].".2.".Str::random(15)."."."png";
-                   $response_2 = Storage::disk('public')->put($name_1, base64_decode($request->input('image2')),'public');
+                   $response_2 = Storage::disk('public')->put($name_2, base64_decode($request->input('image2')),'public');
         }
         if($request->has('image3')){
                     $response_3="";
                    $name_3 = '/combustibles/'.$request['viaje'].'_'.$request['tipo'].".3.".Str::random(15)."."."png";
-                   $response_3 = Storage::disk('public')->put($name_1, base64_decode($request->input('image3')),'public');
+                   $response_3 = Storage::disk('public')->put($name_3, base64_decode($request->input('image3')),'public');
         }
         if($request->has('image4')){
                     $response_4="";
                    $name_4 = '/combustibles/'.$request['viaje'].'_'.$request['tipo'].".4.".Str::random(15)."."."png";
-                   $response_4 = Storage::disk('public')->put($name_1, base64_decode($request->input('image4')),'public');
+                   $response_4 = Storage::disk('public')->put($name_4, base64_decode($request->input('image4')),'public');
         }
         if($request->has('image5')){
                     $response_5="";
                    $name_5 = '/combustibles/'.$request['viaje'].'_'.$request['tipo'].".5.".Str::random(15)."."."png";
-                   $response_5 = Storage::disk('public')->put($name_1, base64_decode($request->input('image5')),'public');
+                   $response_5 = Storage::disk('public')->put($name_5, base64_decode($request->input('image5')),'public');
         }
 
 
@@ -232,7 +232,65 @@ class SubeImagenesController extends Controller
 
     }
 
+    public function subeOtros(Request $request){
 
+        $validator = Validator::make($request->all(), [
+            'viaje' =>  'required',
+            'caseta' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+
+            $response = [
+                'Error' => $validator->messages()->first()
+            ];
+            return response($response, 500);
+        }
+
+         //Se busca la caseta para ver si es inserción o actualización
+         $caseta = EvidenciaCaseta::where('viaje_id',$request['viaje'])->where('numero_interno',$request['caseta'])->first();
+
+         //Se crea la nueva instancia en caso de que no exista
+         if(!$caseta){
+             $caseta = new EvidenciaCaseta();
+             $caseta->viaje_id = $request['viaje'];
+             $caseta->numero_interno = $request['caseta'];
+         }
+
+         $response="";
+
+        if ($request->hasFile('image')){
+            $this->validate($request,[  'image' => 'required|file|image|mimes:jpeg,png,gif,svg' ]);
+            $name = $request->file('image');
+            $response = Storage::disk('public')->put('casetas',$name);
+
+            //return response()->json([ 'message'=>'File uploaded', 'data'=> ['file'=>$response] ]);
+
+        }else{
+
+            $name = '/casetas/'.$request['viaje'].'_'.$request['caseta'].".".Str::random(15)."."."png";
+            $response = Storage::disk('public')->put($name, base64_decode($request->input('image')),'public');
+           // return response()->json([ 'message'=>'Archivo Creado', 'data'=> ['file'=>$response] ]);
+
+        }
+
+
+
+        if(File::exists(public_path("storage/".$caseta->foto_url))){
+            File::delete(public_path("storage/".$caseta->foto_url));
+        }
+
+        $caseta->monto = $request['monto'] ?? '';
+        $caseta->foto_url = $name ;
+        $caseta->observaciones = $request['observaciones'] ?? '';
+        $caseta->lugar = $request['lugar'] ?? '';
+        $caseta->save();
+
+
+
+        return response()->json([ 'message'=>'Archivo Creado', 'data'=> ['file'=>$name] ]);
+
+    }
 
 
 }
