@@ -66,6 +66,11 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <script src="{{ asset('js/table-fixed-header.js') }}"></script>
+<script type="text/javascript">
+   setTimeout(function(){
+       location.reload();
+   },15000);
+</script>
 
 <script language='javascript' type='text/javascript'>
       $(document).ready(function(){
