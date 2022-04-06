@@ -279,6 +279,7 @@ class SubeImagenesController extends Controller
         $validator = Validator::make($request->all(), [
             'tipo' => 'required',
             'entrega' => 'required',
+            'viaje' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -289,7 +290,9 @@ class SubeImagenesController extends Controller
             return response($response, 500);
         }
 
-        $entrega = Entrega::where('id',$request['entrega'])->first();
+        $entrega = Entrega::where('cliente_id',$request['entrega'])
+                            ->where('viaje_id',$request['viaje'])
+                            ->first();
 
 
 
@@ -298,12 +301,12 @@ class SubeImagenesController extends Controller
                  'Error' => 'No se encontró la entrega'  ];
              return response($response, 404);
          }
-        // $hoy = Carbon::now()->format('Y-m-d');
+        // $hoy = Carbon::now();
         if($request['tipo'] == 'llego'){
 
-            $entrega->fecha_llegada = '05/04/2022';
+            $entrega->fecha_llegada = Carbon::now()->format('Y-m-d H:i:s');
         } else {
-            $entrega->fecha_entrega = '03/04/2022';
+            $entrega->fecha_entrega = Carbon::now()->format('Y-m-d H:i:s');
         }
         $entrega->save();
 

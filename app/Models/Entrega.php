@@ -50,23 +50,23 @@ class Entrega extends Model
 
     public function getFechaLlegadaAttribute($value)
     {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+        return $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
     }
 
-    public function setFechaLlegadaAttribute($value)
-    {
-        $this->attributes['fecha_llegada'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
+    // public function setFechaLlegadaAttribute($value)
+    // {
+    //     $this->attributes['fecha_llegada'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    // }
 
-    public function getFechaEntregaAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
+     public function getFechaEntregaAttribute($value)
+     {
+         return $value ? Carbon::parse($value)->format('Y-m-d H:i:s') : null;
+     }
 
-    public function setFechaEntregaAttribute($value)
-    {
-        $this->attributes['fecha_entrega'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
+    // public function setFechaEntregaAttribute($value)
+    // {
+    //     $this->attributes['fecha_entrega'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    // }
 
     protected function serializeDate(DateTimeInterface $date)
     {
