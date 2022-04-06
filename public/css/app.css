@@ -3,23 +3,21 @@
 @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap);
 @import url(https://fonts.googleapis.com/css2?family=BenchNine:wght@300;400;700&display=swap);
 
-@media (min-width:800px) { 
+@media (min-width:800px) {
 .card-body {
-    min-height: 220px !important;
     vertical-align: middle;
 }
 }
 
-@media (max-width:999px) { 
+@media (max-width:999px) {
     .card-body {
         min-height: 150px !important;
         vertical-align: middle;
     }
 }
 
-@media (min-width:1000px) { 
+@media (min-width:1000px) {
     .card-body {
-        min-height: 180px !important;
         vertical-align: middle;
     }
 }
@@ -27,6 +25,7 @@
 .table-title {
     text-align: center;
 }
+
 
 .card-header .fa {
     transition: .3s transform ease-in-out;
@@ -36,7 +35,7 @@
 }
 
 .card-body-dashboard {
-    min-height: 180px !important;    
+    min-height: 100px !important;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -49,16 +48,25 @@
 }
 
 thead {
-    font-family: 'Oswald'; 
+    font-family: 'Oswald';
     text-align: center;
     font-size: medium;
 }
 
 tbody {
-    font-family: 'Noto Sans Display';     
+    font-family: 'Noto Sans Display';
 }
 
 .activo {
     background-color: #9CC545!important;
 }
+
+.table td, .table th {
+    text-align: center;
+}
+
+.select2-container .select2-selection--single {
+    height: auto;
+}
+
 

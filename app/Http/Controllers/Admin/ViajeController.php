@@ -63,6 +63,7 @@ class ViajeController extends Controller
 
     public function store(StoreViajeRequest $request)
     {
+        dd($request);
         $viaje = Viaje::create($request->all());
 
         return redirect()->route('admin.viajes.index')->with(['valor'=>'todo',]);

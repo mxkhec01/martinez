@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use \DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -54,6 +55,8 @@ class Viaje extends Model
 
     protected $dates = [
         'fecha_pago',
+        'fecha_inicio',
+        'fecha_fin',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -67,6 +70,8 @@ class Viaje extends Model
         'estado',
         'monto_pagado',
         'fecha_pago',
+        'fecha_inicio',
+        'fecha_fin',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -106,5 +111,30 @@ class Viaje extends Model
     public function facturas()
     {
         return $this->hasManyThrough(Factura::class, Entrega::class);
+    }
+
+    public function gastos()
+    {
+        return $this->hasMany(EvidenciaOtro::class);
+    }
+
+    public function getFechaInicioAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setFechaInicioAttribute($value)
+    {
+        $this->attributes['fecha_inicio'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
+    public function getFechaFinAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setFechaFinAttribute($value)
+    {
+        $this->attributes['fecha_fin'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 }

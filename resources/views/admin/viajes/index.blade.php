@@ -9,6 +9,7 @@
             </div>
         </div>
     @endcan
+    {{ $valor = $valor ?? 'todo' }}
     <div class="card">
         <div class="card-header">
             @if($valor == 'todo')
@@ -39,7 +40,7 @@
                         <th width="10">
 
                         </th>
-                        <th> 
+                        <th>
                             {{ trans('cruds.viaje.fields.id') }}
                         </th>
                         <th>

@@ -38,7 +38,7 @@ class HomeController
                 'nombre'           => '',
                 'tipo_unidad'   => '',
             ],
-            'translation_key' => 'unidad',
+            'translation_key' => 'unidad_grafica',
         ];
 
 
@@ -74,7 +74,7 @@ class HomeController
                 'licencia'           => '',
                 'tipo_licencia'   => '',
             ],
-            'translation_key' => 'operador',
+            'translation_key' => 'operador_grafica',
         ];
 
         $settings2['data'] = [];

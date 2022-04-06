@@ -20,7 +20,7 @@ class AnticiposViajeController extends Controller
 
         $anticiposViajes = AnticiposViaje::with(['viaje'])->get();
 
-        
+
         return redirect()->back()->with('message', 'Anticipo creado con éxito');
 
     }
@@ -37,8 +37,8 @@ class AnticiposViajeController extends Controller
     public function store(StoreAnticiposViajeRequest $request, Viaje $viaje)
     {
         $anticiposViaje = $viaje->anticipos()->create($request->all());
-        
-        
+
+
 
         return redirect()->back()->with('message', 'Anticipo creado con éxito');
     }
@@ -70,7 +70,7 @@ class AnticiposViajeController extends Controller
         return view('admin.anticiposViajes.show', compact('anticiposViaje'));
     }
 
-    public function destroy(AnticiposViaje $anticiposViaje)
+    public function destroy(Viaje $viaje, AnticiposViaje $anticiposViaje)
     {
         abort_if(Gate::denies('anticipos_viaje_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 

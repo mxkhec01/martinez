@@ -80,7 +80,7 @@ class EntregaController extends Controller
         return view('admin.entregas.show', compact('entrega'));
     }
 
-    public function destroy(Entrega $entrega)
+    public function destroy(Viaje $viaje, Entrega $entrega)
     {
         abort_if(Gate::denies('entrega_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 

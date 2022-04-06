@@ -11,7 +11,7 @@
                 @method('PUT')
                 @csrf
                 <div class="form-row">
-                <div class="form-group col">
+                <div class="form-group col-md-6">
                     <label for="destino">{{ trans('cruds.viaje.fields.nombre_viaje') }}</label>
                     <input class="form-control {{ $errors->has('nombre_viaje') ? 'is-invalid' : '' }}" type="text"
                            name="destino" id="destino"
@@ -23,7 +23,23 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.viaje.fields.nombre_viaje_helper') }}</span>
                 </div>
-                    <div class="form-group col">
+                <div class="form-group col-md-4">
+                    <label for="operador_id">{{ trans('cruds.viaje.fields.operador') }}</label>
+                    <select class="form-control select2 {{ $errors->has('operador') ? 'is-invalid' : '' }}"
+                            name="operador_id" id="operador_id">
+                        @foreach($operadors as $id => $entry)
+                            <option
+                                value="{{ $id }}" {{ (old('operador_id') ? old('operador_id') : $viaje->operador->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('operador'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('operador') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.viaje.fields.operador_helper') }}</span>
+                </div>
+                    <div class="form-group col-md-2">
                         <label class="required">{{ trans('cruds.viaje.fields.estado') }}</label>
                         <select class="form-control {{ $errors->has('estado') ? 'is-invalid' : '' }}" name="estado"
                                 id="estado" required>
@@ -45,7 +61,7 @@
                 <div class="form-row">
 
 
-                <div class="form-group col">
+                <div class="form-group col-md-3">
                     <label for="unidad_id">{{ trans('cruds.viaje.fields.unidad') }}</label>
                     <select class="form-control select2 {{ $errors->has('unidad') ? 'is-invalid' : '' }}"
                             name="unidad_id" id="unidad_id">
@@ -61,25 +77,9 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.viaje.fields.unidad_helper') }}</span>
                 </div>
-                <div class="form-group col">
-                    <label for="operador_id">{{ trans('cruds.viaje.fields.operador') }}</label>
-                    <select class="form-control select2 {{ $errors->has('operador') ? 'is-invalid' : '' }}"
-                            name="operador_id" id="operador_id">
-                        @foreach($operadors as $id => $entry)
-                            <option
-                                value="{{ $id }}" {{ (old('operador_id') ? old('operador_id') : $viaje->operador->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
-                        @endforeach
-                    </select>
-                    @if($errors->has('operador'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('operador') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.viaje.fields.operador_helper') }}</span>
-                </div>
-                <div class="form-group col">
+                <div class="form-group col-md-3">
                     <label for="monto_pagado">Pago Operador</label>
-                    <input class="form-control {{ $errors->has('monto_pagado') ? 'is-invalid' : '' }}" type="text"
+                    <input class="form-control text-right {{ $errors->has('monto_pagado') ? 'is-invalid' : '' }}" type="text"
                            name="monto_pagado" id="monto_pagado"
                            value="{{ old('monto_pagado', $viaje->monto_pagado) }}">
                     @if($errors->has('monto_pagado'))
@@ -89,6 +89,29 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.viaje.fields.nombre_viaje_helper') }}</span>
                 </div>
+                    <div class="form-group col-md-3">
+                        <label for="fecha_inicio">Inicio de viaje</label>
+                        <input class="form-control date {{ $errors->has('fecha_inicio') ? 'is-invalid' : '' }}" type="text"
+                               name="fecha_inicio" id="fecha_inicio" value="{{ old('fecha_inicio',$viaje->fecha_inicio) }}">
+                        @if($errors->has('fecha_inicio'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('fecha_inicio') }}
+                        </div>
+                        @endif
+                        <span class="help-block"></span>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="fecha_fin">Fin de viaje</label>
+                        <input class="form-control date {{ $errors->has('fecha_fin') ? 'is-invalid' : '' }}" type="text"
+                               name="fecha_fin" id="fecha_fin" value="{{ old('fecha_fin',$viaje->fecha_fin) }}">
+                        @if($errors->has('fecha_fin'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('fecha_fin') }}
+                        </div>
+                        @endif
+                        <span class="help-block"></span>
+                    </div>
+
 
                 </div>
                 <div class="form-group">
@@ -126,6 +149,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Cliente</th>
                                 <th scope="col">Facturas</th>
+                                <th scope="col">Acción</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -140,7 +164,14 @@
                                         @endforeach
                                     </ul>
                                 </td>
-                                <td>Editar/borrar</td>
+                                <td>
+                                    <form action="{{ route('admin.viajes.entregas.destroy', ['viaje'=>$viaje , 'entrega' => $entrega ]) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                    </form>
+
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -180,7 +211,14 @@
                                 </td>
                                 <td>{{ $anticipo->descripcion }}</td>
                                 <td>{{ $anticipo->fecha }}</td>
-                                <td>Editar/borrar</td>
+                                <td>
+                                    <form action="{{ route('admin.viajes.anticipos-viajes.destroy', ['viaje'=>$viaje , 'anticipos_viaje' => $anticipo ]) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                    </form>
+
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>

@@ -4,36 +4,36 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="175" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/.env" />
+          <option name="caretOffset" value="5917" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/viajes/create.blade.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="404" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/EvidenciaCaseta.php" />
+          <option name="caretOffset" value="5489" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/viajes/edit.blade.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="221" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/Entrega.php" />
+          <option name="caretOffset" value="1058" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/AnticiposViaje.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="496" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/EvidenciaCombustible.php" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="1993" />
+          <option name="caretOffset" value="3087" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/Viaje.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="7464" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/SubeImagenesController.php" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="872" />
+          <option name="caretOffset" value="785" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/routes/api.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="2997" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/routes/web.php" />
+          <option name="caretOffset" value="1322" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/Entrega.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="2037" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ViajeController.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="9226" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/SubeImagenesController.php" />
         </OpenedFileInfo>
       </list>
     </option>

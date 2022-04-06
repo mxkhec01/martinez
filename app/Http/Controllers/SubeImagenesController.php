@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entrega;
 use App\Models\EvidenciaCaseta;
 use App\Models\EvidenciaCombustible;
 use App\Models\EvidenciaOtro;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -268,6 +270,45 @@ class SubeImagenesController extends Controller
 
 
         return response()->json([ 'message'=>'Gasto Creado', 'data'=> $otro]);
+
+    }
+
+    public function subeEntrega(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'tipo' => 'required',
+            'entrega' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+
+            $response = [
+                'Error' => $validator->messages()->first()
+            ];
+            return response($response, 500);
+        }
+
+        $entrega = Entrega::where('id',$request['entrega'])->first();
+
+
+
+         if(!$entrega){
+             $response = [
+                 'Error' => 'No se encontró la entrega'  ];
+             return response($response, 404);
+         }
+        // $hoy = Carbon::now()->format('Y-m-d');
+        if($request['tipo'] == 'llego'){
+
+            $entrega->fecha_llegada = '05/04/2022';
+        } else {
+            $entrega->fecha_entrega = '03/04/2022';
+        }
+        $entrega->save();
+
+
+
+        return response()->json([ 'message'=>'Entrega actualizada', 'data'=> $entrega]);
 
     }
 

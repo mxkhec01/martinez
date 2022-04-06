@@ -28,7 +28,7 @@
                                 <div class="col-sm-6 col-lg-3">
                                     <div @class([
                                         'card',
-                                        'text-white',                                        
+                                        'text-white',
                                         App\Models\Viaje::ESTADO_BACKGROUND[$y->estado] ?? '',
                                         'mb-3',
                                     ]) style="max-width: 18rem;">
@@ -38,8 +38,8 @@
                                             </h2>
                                         </div>
                                         <div class="card-body align-items-center d-flex justify-content-center">
-                                            <h1 class="text-center">
-                                                {{ App\Models\Viaje::ESTADO_SELECT[$y->estado] ?? '' }}</h1>
+                                            <h3 class="text-center">
+                                                {{ App\Models\Viaje::ESTADO_SELECT[$y->estado] ?? '' }}</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                                         <small class="text-muted">docs</small></a></div>
                                     </div>
                                     <div class="card-body">
-                                    
+
                                     </div>
                                 </div>
                             </div> -->
@@ -168,12 +168,12 @@
                                 <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">docs</small></a></div>
                                 </div>
                                 <div class="card-body">
-                                
+
                                 </div>
                                 </div>
                             </div> -->
                         </div>{{-- fin del row --}}
-                    </div>  
+                    </div>
                     <div class="row mt-2">
                         <div class="col-12">
                                 <div class="c-chart-wrapper" style="height: 30rem;">
@@ -192,14 +192,14 @@
                                     <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">docs</small></a></div>
                                     </div>
                                     <div class="card-body">
-                                    
+
                                     </div>
                                 </div> -->
                                 <div>
                             </div>{{-- fin del row --}}
                         </div>
                     </div>
-                                  
+
             </div>
         </div>
     </div>
@@ -221,7 +221,7 @@
     data: {
       labels : <?php echo $operadores; ?>,
       datasets : [
-        {          
+        {
           backgroundColor : 'rgba(220, 220, 220, 0.2)',
           borderColor : 'rgba(220, 220, 220, 1)',
           pointBackgroundColor : 'rgba(220, 220, 220, 1)',
