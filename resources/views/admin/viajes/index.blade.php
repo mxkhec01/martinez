@@ -9,6 +9,10 @@
             </div>
         </div>
     @endcan
+    @php
+     $valor = $valor ?? 'todo' ;
+    @endphp
+    
     <div class="card">
         <div class="card-header">
             @if($valor == 'todo')

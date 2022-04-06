@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.viaje.title') }}
+        <h3>Entregas del viaje {{ $viaje->id }} - {{ $viaje->destino }} </h3>
     </div>
     @php
 

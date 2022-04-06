@@ -69,4 +69,8 @@ tbody {
     height: auto;
 }
 
+.card_compacto {
+    margin-bottom: 0px !important;
+}
+
 

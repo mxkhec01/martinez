@@ -14,6 +14,7 @@ class EvidenciaCaseta extends Model
         'viaje_id',
         'monto',
         'lugar',
+        'tag',
         'observaciones',
         'foto_url',
         'numero_interno',
