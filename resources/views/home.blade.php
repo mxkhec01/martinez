@@ -240,7 +240,7 @@
         maintainAspectRatio: false,
         title: {
             display: true,
-            text: 'PAGOS POR DIA'
+            text: 'SALARIO A OPERADOR ÚLTIMAS 3 SEMANAS'
         },
         scales: {
             xAxes: [{
@@ -274,7 +274,7 @@
         maintainAspectRatio: false,
         title: {
                 display: true,
-                text: 'VIAJES POR UNIDAD'
+                text: 'USO DE UNIDADES ÚLTIMAS 3 SEMANAS'
             }
     }
   })
@@ -298,7 +298,7 @@
       maintainAspectRatio: false,
       title: {
                 display: true,
-                text: 'ANTICIPOS POR DIA'
+                text: 'ANTICIPOS EMITIDOS ÚLTIMAS 3 SEMANAS'
             }
     }
   })
