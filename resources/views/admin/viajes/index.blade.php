@@ -9,7 +9,10 @@
             </div>
         </div>
     @endcan
-    {{ $valor = $valor ?? 'todo' }}
+    @php
+     $valor = $valor ?? 'todo' ;
+    @endphp
+    
     <div class="card">
         <div class="card-header">
             @if($valor == 'todo')

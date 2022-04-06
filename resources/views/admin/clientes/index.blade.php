@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.cliente.title_singular') }} {{ trans('global.list') }}
+       Lista de Clientes
         @can('cliente_create')
     {{-- <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12"> --}}

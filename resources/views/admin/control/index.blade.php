@@ -18,7 +18,7 @@
             <th scope="col">Destino</th>
             <th scope="col">Operador</th>
             <th scope="col">Unidad</th>
-            <th scope="col">Fecha Inicio</th>
+            <th scope="col">Inicio Viaje</th>
             <th scope="col">Asignadas</th>
             <th scope="col">Pendientes</th>
             <th scope="col">Completadas</th>
@@ -42,7 +42,7 @@
                 <td class="d-flex justify-content-center">{{  $viaje->destino }}</td>
                 <td>{{  $viaje->operador->nombre ?? '' }}  </td>
                 <td>{{  $viaje->unidad->codigo }}</td>
-                <td>{{  $viaje->updated_at }}</td>
+                <td>{{  $viaje->fecha_inicio ?? '' }}</td>
 
                 <td class="{{ ($num_entregas_activas == 0 && $num_total_entregas >0 ) ? "bg-success" : "" }}">{{  $num_total_entregas }}</td>
                 <td class="bg-warning">{{  $num_entregas_activas }}</td>

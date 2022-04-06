@@ -8,10 +8,6 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/viajes/create.blade.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="5489" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/viajes/edit.blade.php" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
           <option name="caretOffset" value="1058" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/AnticiposViaje.php" />
         </OpenedFileInfo>
@@ -20,20 +16,32 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/Viaje.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="785" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/routes/api.php" />
+          <option name="caretOffset" value="3827" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/SubeImagenesController.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
           <option name="caretOffset" value="1322" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/Entrega.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="2037" />
+          <option name="caretOffset" value="2016" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ViajeController.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="9226" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/SubeImagenesController.php" />
+          <option name="caretOffset" value="630" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/database/migrations/2022_04_04_150046_create_evidencia_combustibles_table.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="431" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/database/migrations/2022_04_05_205850_add_column_tag_to_evidencia_casetas.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="365" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/EvidenciaCaseta.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="0" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/viajes/gastos.blade.php" />
         </OpenedFileInfo>
       </list>
     </option>

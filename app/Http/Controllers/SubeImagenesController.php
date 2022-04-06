@@ -139,6 +139,7 @@ class SubeImagenesController extends Controller
         $caseta->foto_url = $name ;
         $caseta->observaciones = $request['observaciones'] ?? '';
         $caseta->lugar = $request['lugar'] ?? '';
+        $caseta->tag = $request['tag'] ?? '';
         $caseta->save();
 
 

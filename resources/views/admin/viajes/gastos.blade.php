@@ -3,53 +3,71 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} Gastos de viaje
+       <h3>Gastos del viaje {{ $viaje->id }} - {{ $viaje->destino }} <a class="btn btn-default float-right" href="{{ URL::previous() }}">
+                    Regresar
+                </a></h3>
     </div>
     @php
 
-    $suma_casetas = $viaje->casetas->sum('monto');
+    $suma_casetas_efe = $viaje->casetas->where('tag','0')->sum('monto');
+    $suma_casetas_tag = $viaje->casetas->where('tag','1')->sum('monto');
+
+
     $suma_combustible_convenio = $viaje->combustibles->where('convenio','1')->sum('monto');
     $suma_combustible_efectivo = $viaje->combustibles->where('convenio','0')->sum('monto');
+    $suma_gastos =               $viaje->gastos()->sum('monto');
     $salario_operador = $viaje->monto_pagado;
 
     $suma_anticipos = $viaje->anticipos->sum('monto');
+    $saldo_operador= $suma_anticipos - ($suma_casetas_efe + $suma_combustible_efectivo + $suma_gastos);
 
+    $km_anterior = 0;
 
     @endphp
-    <div class="card-body">
-        <div class="form-group">
-            <div class="form-group">
-                <a class="btn btn-default" href="{{ URL::previous() }}">
-                    Regresar
-                </a>
-            </div>
+    <!-- <div class="card-body">
+        
 
-            <div class="m-t-25">
-                <div class="accordion" id="accordion-default">
+            <div class="m-t-25">-->
+                <div class="accordion" id="accordion-default"> 
 
 
                     <!-- ABRO SUMATORIA-->
-                    <div class="card">
+                    <div class="card card_compacto">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th scope="col">Total gastos</th>
-                                        <th scope="col">Combustible por convenio</th>
+                                       
                                         <th scope="col">Anticipo</th>
+                                        @if($saldo_operador > 0)
+                                        <th scope="col">Por Devolver</th>
+                                        @else
                                         <th scope="col">A Favor</th>
+                                        @endif
+                                        
                                         <th scope="col">Salario a Operador</th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <th class="text-primary" scope="row" style="font-weight: normal;">$ 13,179.13
+                                        <th class="text-primary" scope="row" style="font-weight: normal;">@money(
+                                            $suma_casetas_efe +
+                                            $suma_casetas_tag +
+                                            $suma_combustible_convenio +
+                                            $suma_combustible_efectivo +
+                                            $suma_gastos
+                                        )
                                         </th>
-                                        <td class="text-primary">@money($suma_combustible_convenio)</td>
+                                        
                                         <td class="text-primary">@money($suma_anticipos)</td>
-                                        <td class="saldo_verde">$ 3,393.48</td>
+                                        @if($saldo_operador > 0)
+                                        <td class="saldo_verde" style="color:#fa600d; font-weight: bolder;">@money($saldo_operador)</td>
+                                        @else
+                                        <td class="saldo_verde" style="color:#39990e; font-weight: bolder;">@money(abs($saldo_operador))</td>
+                                        @endif
                                         <td class="text-primary">@money($salario_operador)</td>
 
                                     </tr>
@@ -62,13 +80,13 @@
 
 
                     <!-- ABRO TARJETON COMBUSTIBLE-->
-                    <div class="card">
+                    <div class="card card_compacto">
                         <div class="card-header">
                             <h5 class="card-title"><a class="collapsed" data-toggle="collapse" href="#menu_1">
                                     Combustible <span class="text-primary">@money($suma_combustible_convenio+$suma_combustible_efectivo)</span>
                                     <span style="">(Por convenio=</span><!-- <span style="color:#fa600d;"> -->
                                     @money($suma_combustible_convenio)<span style="" ;="" text-transform:="">|| En efectivo=</span>
-                                    <!-- <span style="color:#39990e;"> -->@money($suma_combustible_efectivo)<span
+                                    @money($suma_combustible_efectivo)<span
                                         style="color:#949494;">)</span></a></h5>
                         </div>
                         <!-- <div id="menu_1" class="collapse show" data-parent="#accordion-default"> -->
@@ -82,6 +100,7 @@
                                             <th scope="col">Monto</th>
                                             <th scope="col">Km</th>
                                             <th scope="col">Litros</th>
+                                            <th scope="col">Rendimiento</th>
                                             <th scope="col">Convenio</th>
                                             <th scope="col">Tablero Inicial</th>
                                             <th scope="col">Bomba Inicial</th>
@@ -91,13 +110,25 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-
+                                       
                                         @foreach($viaje->combustibles as $combustible)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>@money($combustible->monto)</td>
                                             <td>{{ $combustible->km }}</td>
                                             <td>{{ $combustible->litros }}</td>
+                                            <td>
+                                            @if($km_anterior != 0)
+                                                {{ round(($combustible->km - $km_anterior) / $combustible->litros,2) }}
+
+                                            @else
+                                                -
+                                            @endif
+                                            @php
+                                                $km_anterior = $combustible->km;
+                                                @endphp
+
+                                            </td>
                                             @if($combustible->convenio)
                                             <td><span
                                                     style="color:#fa600d; font-weight: bolder;"> - Por Convenio - </span>
@@ -129,9 +160,15 @@
                     </div>
                     <!-- CIERRO TARJETON COMBUSTIBLE-->
                     <!-- ABRO TARJETON CASETAS-->
-                    <div class="card">
+                    <div class="card card_compacto">
                         <div class="card-header">
-                            <h5 class="card-title"> <a class="collapsed" data-toggle="collapse" href="#menu_2" > Casetas <span class="text-primary">@money($suma_casetas)</span> </a> </h5>
+                            <h5 class="card-title"> <a class="collapsed" data-toggle="collapse" href="#menu_2" >
+                                    Casetas <span class="text-primary">@money($suma_casetas_tag+$suma_casetas_efe)</span>
+                                 <span style="">(Con tag=</span><!-- <span style="color:#fa600d;"> -->
+                                    @money($suma_casetas_tag)<span style="" ;="" text-transform:="">|| En efectivo=</span>
+                                    @money($suma_casetas_efe)<span
+                                        style="color:#949494;">)</span>
+                                </a> </h5>
                         </div>
                         <div id="menu_2" class="collapse" data-parent="#accordion-default" style="">
                             <div class="card-body">
@@ -141,6 +178,7 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Monto</th>
+                                            <th scope="col">Convenio</th>
                                             <th scope="col">Lugar</th>
                                             <th scope="col">Foto</th>
                                             <th scope="col">Observaciones</th>
@@ -151,6 +189,14 @@
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $caseta->monto }}</td>
+                                            @if($caseta->tag)
+                                            <td><span
+                                                    style="color:#fa600d; font-weight: bolder;"> - Con Tag - </span>
+                                            </td>
+                                            @else
+                                            <td><span style="color:#39990e; font-weight: bolder;"> - Efectivo -</span>
+                                            </td>
+                                            @endif
                                             <td>{{ $caseta->lugar }}</td>
                                             <td> @if($caseta['foto_url'])
                                                 <a href="{{ url('storage'.$caseta['foto_url']) }}"
@@ -172,7 +218,7 @@
                     </div>
                     @foreach(App\Models\Viaje::GASTOS_OTROS as $key => $item)
                     <!-- ABRO TARJETON Gastos-->
-                    <div class="card">
+                    <div class="card card_compacto">
                         <div class="card-header">
                             <h5 class="card-title"><a class="collapsed" data-toggle="collapse" href="#menu_{{ $loop->iteration +2 }}"> {{ $item }}
                                     <span class="text-primary">@money($viaje->gastos()->where('tipo',$key)->sum('monto'))</span> </a></h5>
@@ -208,7 +254,7 @@
 
 
                     <!-- ABRO TARJETON ANTICIPOS-->
-                    <div class="card">
+                    <div class="card card_compacto">
                         <div class="card-header">
                             <h5 class="card-title"><a class="collapsed" data-toggle="collapse" href="#menu_8"> Anticipos
                                    <span class="text-primary">@money($suma_anticipos)</span> </a></h5>
@@ -249,10 +295,10 @@
                 <a class="btn btn-default" href="{{ route('admin.viajes.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
-            </div>
-        </div>
-    </div>
-</div>
+             </div>
+        
+    <!-- </div>
+</div>  -->
 
 
 @endsection

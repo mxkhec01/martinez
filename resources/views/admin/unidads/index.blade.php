@@ -11,7 +11,7 @@
 @endcan --}}
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.unidad.title_singular') }} {{ trans('global.list') }}
+        Lista de Unidades
         @can('unidad_create')
             {{-- <div style="margin-bottom: 10px;" class="row">
                 <div class="col-lg-12"> --}}
