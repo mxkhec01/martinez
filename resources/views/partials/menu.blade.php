@@ -139,10 +139,8 @@
         @can('factura_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route("admin.control.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/control") || request()->is("admin/controls/*") ? "c-active" : "" }}">
-                    <i class="fa-fw fas fa-cogs c-sidebar-nav-icon">
-
-                    </i>
-                    Control
+                    <i class="fa-fw fas fa-broadcast-tower c-sidebar-nav-icon"></i>
+                    Torre de Control
                 </a>
             </li>
         @endcan
