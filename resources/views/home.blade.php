@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+
 @section('content')
     <div class="content">
         <div class="row">
@@ -28,7 +31,7 @@
                                 <div class="col-sm-6 col-lg-3">
                                     <div @class([
                                         'card',
-                                        'text-white',
+                                        'text-white',                                        
                                         App\Models\Viaje::ESTADO_BACKGROUND[$y->estado] ?? '',
                                         'mb-3',
                                     ]) style="max-width: 18rem;">
@@ -38,8 +41,8 @@
                                             </h2>
                                         </div>
                                         <div class="card-body align-items-center d-flex justify-content-center">
-                                            <h3 class="text-center">
-                                                {{ App\Models\Viaje::ESTADO_SELECT[$y->estado] ?? '' }}</h3>
+                                            <h1 class="text-center">
+                                                {{ App\Models\Viaje::ESTADO_SELECT[$y->estado] ?? '' }}</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -53,7 +56,7 @@
 
                         <div class="row pb-4 mt-2">
                             <div class="col-md-6 col-sm-12 col-12">
-                                <div class="table-title mb-4">
+                                <div class="table-title mb-4" >
                                     <h3>{{ $settings1['chart_title'] }}</h3>
                                 </div>
                                 {{-- Widget - latest entries --}}
@@ -62,7 +65,7 @@
                                         <thead>
                                             <tr>
                                                 @foreach ($settings1['fields'] as $key => $value)
-                                                    <th>
+                                                    <th style="position:sticky;top: 0;background: white;" scope="col">
                                                         {{ trans(sprintf('cruds.%s.fields.%s', $settings1['translation_key'] ?? 'pleaseUpdateWidget', $key)) }}
                                                     </th>
                                                 @endforeach
@@ -105,7 +108,7 @@
                                         <thead>
                                             <tr>
                                                 @foreach ($settings2['fields'] as $key => $value)
-                                                    <th>
+                                                    <th  style="position:sticky;top: 0;background: white;" scope="col">
                                                         {{ trans(sprintf('cruds.%s.fields.%s', $settings2['translation_key'] ?? 'pleaseUpdateWidget', $key)) }}
                                                     </th>
                                                 @endforeach
@@ -155,7 +158,7 @@
                                         <small class="text-muted">docs</small></a></div>
                                     </div>
                                     <div class="card-body">
-
+                                    
                                     </div>
                                 </div>
                             </div> -->
@@ -168,12 +171,12 @@
                                 <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">docs</small></a></div>
                                 </div>
                                 <div class="card-body">
-
+                                
                                 </div>
                                 </div>
                             </div> -->
                         </div>{{-- fin del row --}}
-                    </div>
+                    </div>  
                     <div class="row mt-2">
                         <div class="col-12">
                                 <div class="c-chart-wrapper" style="height: 30rem;">
@@ -192,20 +195,22 @@
                                     <div class="card-header-actions"><a class="card-header-action" href="http://www.chartjs.org" target="_blank"><small class="text-muted">docs</small></a></div>
                                     </div>
                                     <div class="card-body">
-
+                                    
                                     </div>
                                 </div> -->
                                 <div>
                             </div>{{-- fin del row --}}
                         </div>
                     </div>
-
+                                  
             </div>
         </div>
     </div>
 @endsection
 @section('scripts')
+
 @parent
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
 {{-- <script src="{{ asset('js/Chart.min.js') }}"></script> --}}
 <script src="{{ asset('js/coreui-chartjs.bundle.js') }}"></script>
 {{-- <script src="{{ asset('js/charts.js') }}"></script> --}}
@@ -221,7 +226,7 @@
     data: {
       labels : <?php echo $operadores; ?>,
       datasets : [
-        {
+        {          
           backgroundColor : 'rgba(220, 220, 220, 0.2)',
           borderColor : 'rgba(220, 220, 220, 1)',
           pointBackgroundColor : 'rgba(220, 220, 220, 1)',
@@ -235,7 +240,7 @@
         maintainAspectRatio: false,
         title: {
             display: true,
-            text: 'PAGOS POR OPERADOR'
+            text: 'PAGOS POR DIA'
         },
         scales: {
             xAxes: [{
@@ -298,4 +303,5 @@
     }
   })
 </script>
+
 @endsection
