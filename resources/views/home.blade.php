@@ -41,8 +41,8 @@
                                             </h2>
                                         </div>
                                         <div class="card-body align-items-center d-flex justify-content-center">
-                                            <h1 class="text-center">
-                                                {{ App\Models\Viaje::ESTADO_SELECT[$y->estado] ?? '' }}</h1>
+                                            <h3 class="text-center">
+                                                {{ App\Models\Viaje::ESTADO_SELECT[$y->estado] ?? '' }}</h3>
                                         </div>
                                     </div>
                                 </div>
