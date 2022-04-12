@@ -6,6 +6,7 @@ use App\Models\Entrega;
 use App\Models\EvidenciaCaseta;
 use App\Models\EvidenciaCombustible;
 use App\Models\EvidenciaOtro;
+use App\Models\Factura;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -313,6 +314,58 @@ class SubeImagenesController extends Controller
 
 
         return response()->json([ 'message'=>'Entrega actualizada', 'data'=> $entrega]);
+
+    }
+
+    public function subeFactura(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'image' =>  'required',
+            'factura' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+
+            $response = [
+                'Error' => $validator->messages()->first()
+            ];
+            return response($response, 500);
+        }
+
+         //Se busca la factura para ver si es inserción o actualización
+         $factura = Factura::where('id',$request['factura'])->first();
+
+         //Se crea la nueva instancia en caso de que no exista
+        
+         $response="";
+
+        if ($request->hasFile('image')){
+            $this->validate($request,[  'image' => 'required|file|image|mimes:jpeg,png,gif,svg' ]);
+            $name = $request->file('image');
+            $response = Storage::disk('public')->put('facturas',$name);
+
+            //return response()->json([ 'message'=>'File uploaded', 'data'=> ['file'=>$response] ]);
+
+        }else{
+
+            $name = '/facturas/'.$request['factura'].'_'.Str::random(15)."."."png";
+            $response = Storage::disk('public')->put($name, base64_decode($request->input('image')),'public');
+           // return response()->json([ 'message'=>'Archivo Creado', 'data'=> ['file'=>$response] ]);
+
+        }
+
+
+
+        if(File::exists(public_path("storage/".$factura->foto_url))){
+            File::delete(public_path("storage/".$factura->foto_url));
+        }
+
+        $factura->foto_url = $name ;
+        $factura->save();
+
+
+
+        return response()->json([ 'message'=>'Archivo Creado', 'data'=> ['file'=>$name] ]);
 
     }
 

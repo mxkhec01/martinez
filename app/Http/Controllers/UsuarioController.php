@@ -101,7 +101,7 @@ class UsuarioController extends Controller
 
 
     public function obten_viajes($id) {
-        $viajes =  Viaje::with(['entregas','entregas.facturas','entregas.cliente','unidad'])->where('operador_id',$id)->where('estado','activo')->get();
+        $viajes =  Viaje::with(['entregas','entregas.facturas','entregas.cliente','unidad','anticipos'])->where('operador_id',$id)->where('estado','activo')->get();
 
         if ($viajes->count() > 0) {
             $response = $viajes->toJson(JSON_PRETTY_PRINT) ;
