@@ -1,0 +1,1 @@
+[11-Apr-2022 23:01:58 America/Mexico_City] PHP Fatal error:  Trait "App\Http\Livewire\WithConfirmation" not found in /home/laravel/martinez/app/Http/Livewire/Viajes.php on line 13

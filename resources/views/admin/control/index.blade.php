@@ -45,7 +45,7 @@
                 <td>{{  $viaje->fecha_inicio ?? '' }}</td>
 
                 <td class="{{ ($num_entregas_activas == 0 && $num_total_entregas >0 ) ? "bg-success" : "" }}">{{  $num_total_entregas }}</td>
-                <td class="bg-warning">{{  $num_entregas_activas }}</td>
+                <td class="{{ ($num_entregas_activas == 0 && $num_total_entregas >0 ) ? "bg-success" :"bg-warning" }}">{{  $num_entregas_activas }}</td>
                 <td class="{{ ($num_entregas_activas == 0 && $num_total_entregas >0 ) ? "bg-success" : "bg-success" }}" >{{  $num_total_entregas - $num_entregas_activas }}</td>
                 @can('viaje_edit')
                     <td class="d-flex justify-content-center">

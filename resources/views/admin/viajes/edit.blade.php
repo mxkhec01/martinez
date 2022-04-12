@@ -112,6 +112,24 @@
                         <span class="help-block"></span>
                     </div>
 
+                    <div class="form-group col-md-3">
+                        <label class="required">Tipo de carga</label>
+                        <select class="form-control {{ $errors->has('carga') ? 'is-invalid' : '' }}" name="carga"
+                                id="carga" required>
+                            <option value disabled {{ old('carga', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                            @foreach(App\Models\Viaje::CARGA_SELECT as $key => $label)
+                            <option value="{{ $key }}" {{ old('carga', $viaje->carga) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                            @endforeach
+                        </select>
+                      
+                        @if($errors->has('carga'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('carga') }}
+                        </div>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.viaje.fields.estado_helper') }}</span>
+                    </div>
+
 
                 </div>
                 <div class="form-group">

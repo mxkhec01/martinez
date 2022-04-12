@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('menu-asigna-entregas', 'MenuAsignaEntregaController');
 
     // Viaje
+    Route::post('viajes/busca','ViajeController@buscar')->name('viajes.buscar');
     Route::delete('viajes/destroy', 'ViajeController@massDestroy')->name('viajes.massDestroy');
     Route::get('viajes/estado/{valor}','ViajeController@mostrar')->name('viajes.mostrar');
     Route::get('viajes/gastos/{viaje}','ViajeController@gastos')->name('viajes.gastos');

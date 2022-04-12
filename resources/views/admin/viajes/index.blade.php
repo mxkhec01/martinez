@@ -146,7 +146,7 @@
                                         <a class="dropdown-item"
                                         href="{{ route('admin.viajes.gastos', $viaje->id) }}">
                                             <i class="fa fa-eye" style="width: 50px;"></i>
-                                            Ver gastos
+                                            Detalles
                                         </a>
                                     @endcan
 

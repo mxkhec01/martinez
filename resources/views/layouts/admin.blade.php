@@ -37,11 +37,24 @@
                 <i class="fas fa-fw fa-bars"></i>
             </button>
 
+
+
+
+
+
             <a class="c-header-brand d-lg-none" href="#">{{ trans('panel.site_title') }}</a>
 
             <button class="c-header-toggler mfs-3 d-md-down-none" type="button" responsive="true">
                 <i class="fas fa-fw fa-bars"></i>
             </button>
+
+            <form action="{{route('admin.viajes.buscar')}}" method="POST" role="search">
+              {{ csrf_field() }}
+              <div class="input-group align-right">
+                   <input class="form-control" type="text" name="viaje" placeholder="Buscar Viaje" aria-label="Search"> 
+                   <button type="submit" class="btn btn-default">Buscar</button>  
+              </div>   
+          </form>
 
             <ul class="c-header-nav ml-auto">
                 @if(count(config('panel.available_languages', [])) > 1)

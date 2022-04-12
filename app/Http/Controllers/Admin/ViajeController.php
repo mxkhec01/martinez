@@ -12,6 +12,7 @@ use App\Models\Unidad;
 use App\Models\Viaje;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Symfony\Component\HttpFoundation\Response;
 
 class ViajeController extends Controller
@@ -37,7 +38,12 @@ class ViajeController extends Controller
         if (!$valor || $valor=='todo') {
             $viajes = Viaje::with([ 'unidad', 'operador'])->get();
         }else {
-            $viajes = Viaje::with(['unidad', 'operador'])->where('estado', '=', $valor)->get();
+            if ($valor == 'finalizado') {
+                $viajes = Viaje::with(['unidad', 'operador'])->where('estado', '=', $valor)->where('fecha_fin','>=',Carbon::now()->subDays(21))->get();
+            }else{
+                $viajes = Viaje::with(['unidad', 'operador'])->where('estado', '=', $valor)->get();
+            }
+            
         }
 
 
@@ -108,7 +114,7 @@ class ViajeController extends Controller
     {
         abort_if(Gate::denies('viaje_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $viaje->with('casetas');
+        $viaje->with(['casetas','entregas','facturas']);
 
         return view('admin.viajes.gastos', compact('viaje'));
     }
@@ -127,5 +133,22 @@ class ViajeController extends Controller
         Viaje::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    
+    public function buscar(Request $request)
+    {
+        //dd($request);
+        
+        $viaje = Viaje::find($request['viaje']);
+
+        if(!$viaje){
+            return redirect()->back()->with('message', 'Viaje '.$request['viaje'].' no existe');
+        }
+
+        $viaje->with(['casetas','entregas','facturas']);
+
+        return view('admin.viajes.gastos', compact('viaje'));
+
     }
 }

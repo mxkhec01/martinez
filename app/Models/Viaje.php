@@ -24,6 +24,12 @@ class Viaje extends Model
         'finalizado' => 'Finalizado',
     ];
 
+    public const CARGA_SELECT = [
+        'ligera'     => 'Carga Ligera',
+        'promedio'   => 'Carga Promedio',
+        'pesada'     => 'Carga Pesada',
+    ];
+
     public const ESTADO_BACKGROUND = [
         'activo'     => 'activo',
         'revision'   => 'bg-danger',
@@ -75,6 +81,7 @@ class Viaje extends Model
         'created_at',
         'updated_at',
         'deleted_at',
+        'carga',
     ];
 
     public function unidad()
