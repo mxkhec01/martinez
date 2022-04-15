@@ -123,7 +123,8 @@ class HomeController
                 ->leftJoin('viajes', function ($leftJoin) use($dias) {
                     $leftJoin
                         ->on('operadors.id', '=', 'viajes.operador_id')
-                        ->on('viajes.created_at','>=',DB::raw($dias[0]));
+                        ->where('viajes.fecha_fin','>=',$dias[0])
+                        ->where('viajes.estado','=','finalizado');
                 })
                 ->groupBy('nombre')
                 ->orderBy('monto','desc')

@@ -11,12 +11,17 @@ class Facturas extends Component
 {
     public $indiceEdicionFactura;
     public $facturas;
-    public Entrega $entrega;
+    public $entrega;
 
 
     public function render()
     {
-        $this->facturas = $this->entrega->facturas->toArray();
+        //dd($this->entrega);
+        if($this->entrega) {
+            $this->facturas = $this->entrega->facturas->toArray();
+        } else {
+            $this->facturas = [];
+            }
         return view('livewire.facturas',['facturas',$this->facturas
         ]);
     }
@@ -34,5 +39,6 @@ class Facturas extends Component
             }
         }
         $this->indiceEdicionFactura = null;
+        $this->entrega->refresh();
     }
 }

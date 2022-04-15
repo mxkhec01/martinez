@@ -121,7 +121,7 @@
                             <option value="{{ $key }}" {{ old('carga', $viaje->carga) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
                             @endforeach
                         </select>
-                      
+
                         @if($errors->has('carga'))
                         <div class="invalid-feedback">
                             {{ $errors->first('carga') }}
@@ -176,11 +176,7 @@
                                 <th scope="row">{{ $entrega->id }}</th>
                                 <td>{{ $entrega->cliente->razon_social }}</td>
                                 <td>
-                                    <ul>
-                                        @foreach($entrega->facturas as $factura)
-                                        <li>{{ $factura->numero_factura }}</li>
-                                        @endforeach
-                                    </ul>
+                                    @livewire('facturas',['entrega'=>$entrega])
                                 </td>
                                 <td>
                                     <form action="{{ route('admin.viajes.entregas.destroy', ['viaje'=>$viaje , 'entrega' => $entrega ]) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
