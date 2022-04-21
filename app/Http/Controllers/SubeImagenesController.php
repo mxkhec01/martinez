@@ -72,6 +72,7 @@ class SubeImagenesController extends Controller
     {
         
         $tipo = $request['tipo'];
+        
         $viaje = $request['viaje'];
         $registro = $request['registro'];
 
@@ -98,9 +99,13 @@ class SubeImagenesController extends Controller
             return response($response,200);
         }
         $response = [
-            'Error' => 'No se encontró el registro'
+            'Error' => 'No se encontró el registro',
+            'Tipo' => $tipo,
+            'Viaje' => $viaje,
+            'registro' => $registro,
+            'request' => $request,
         ];
-        return response($response,200);
+        return response($response,404);
     }
 
 
