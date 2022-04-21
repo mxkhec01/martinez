@@ -66,8 +66,8 @@ return [
         ],
     ],
     'catalogo' => [
-        'title'          => 'Catalogos',
-        'title_singular' => 'Catalogo',
+        'title'          => 'Catálogos',
+        'title_singular' => 'Catálogo',
     ],
     'menuCliente' => [
         'title'          => 'Clientes',

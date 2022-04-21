@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Livewire\WithConfirmation;
-use App\Http\Livewire\WithSorting;
 use App\Models\Viaje;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
@@ -14,7 +12,7 @@ class Viajes extends Component
 {
     use WithPagination;
     use WithSorting;
-    use WithConfirmation;
+   // use WithConfirmation;
 
     public int $perPage;
 

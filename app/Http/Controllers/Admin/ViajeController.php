@@ -142,13 +142,18 @@ class ViajeController extends Controller
         
         $viaje = Viaje::find($request['viaje']);
 
-        if(!$viaje){
-            return redirect()->back()->with('message', 'Viaje '.$request['viaje'].' no existe');
-        }
+    
 
-        $viaje->with(['casetas','entregas','facturas']);
+        if($viaje){
+
+            $viaje->with(['casetas','entregas','facturas']);
 
         return view('admin.viajes.gastos', compact('viaje'));
+           
+        } else {
+
+            return redirect(route('admin.viajes.index'))->with('message', 'Viaje '.$request['viaje'].' no existe');
+        }
 
     }
 }
