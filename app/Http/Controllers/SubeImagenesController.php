@@ -60,31 +60,47 @@ class SubeImagenesController extends Controller
         //
     }
 
-    /**
+
+
+     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $viaje)
+    public function destroy_gasto(Request $request)
     {
-        $caseta= EvidenciaCaseta::where("viaje_id",$viaje)
-                   ->where("numero_interno",$id)
-                   ->first();
-        if($caseta){
-            $caseta->delete();
+        
+        $tipo = $request['tipo'];
+        $viaje = $request['viaje'];
+        $registro = $request['registro'];
+
+        if($tipo == "combustible")
+        {
+            $record = EvidenciaCombustible::where("viaje_id",$viaje)
+                    ->where("numero_interno",$registro);
+        }elseif($tipo == "caseta"){
+            $record = EvidenciaCaseta::where("viaje_id",$viaje)
+                    ->where("numero_interno", $registro)
+                    ->first();
+        }else{
+            $record = EvidenciaOtro::where("tipo",$tipo)
+                    ->where("viaje_id",$viaje)
+                    ->where("numero_interno",$registro)
+                    ->first();
+        }
+
+        if($record) {
+            $record->delete();
             $response = [
                 'OK' => 'Registro eliminado'
             ];
             return response($response,200);
         }
-
         $response = [
             'Error' => 'No se encontró el registro'
         ];
         return response($response,200);
-
-
     }
 
 

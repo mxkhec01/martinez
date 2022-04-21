@@ -15,7 +15,8 @@ Route::group(['middleware'=>['auth:sanctum']], function() {
     Route::post('sube-combustible', [\App\Http\Controllers\SubeImagenesController::class,'subeGasolina']);
     Route::post('sube-entrega',[\App\Http\Controllers\SubeImagenesController::class,'subeEntrega']);
     Route::post('sube-factura',[\App\Http\Controllers\SubeImagenesController::class,'subeFactura']);
-    Route::get('borra-caseta/{id}/{viaje}', [\App\Http\Controllers\SubeImagenesController::class,'destroy']);
+ //   Route::get('borra-caseta/{id}/{viaje}', [\App\Http\Controllers\SubeImagenesController::class,'destroy']);
+    Route::get('borra-registro', [\App\Http\Controllers\SubeImagenesController::class,'destroy_gasto']);
 
 });
 
