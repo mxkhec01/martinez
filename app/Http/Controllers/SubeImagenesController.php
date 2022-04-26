@@ -7,6 +7,7 @@ use App\Models\EvidenciaCaseta;
 use App\Models\EvidenciaCombustible;
 use App\Models\EvidenciaOtro;
 use App\Models\Factura;
+use App\Models\Operador;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -390,5 +391,6 @@ class SubeImagenesController extends Controller
 
     }
 
+   
 
 }

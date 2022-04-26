@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Operador;
 use App\Models\Viaje;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
@@ -114,4 +115,33 @@ class UsuarioController extends Controller
             'message' => 'No hay viajes asignados'
         ], 404);
   }
+
+  public function viajes_semanas()
+  {
+
+      $operador = auth()->user();
+
+
+      $viajes_semana = $operador->viajes()->where('fecha_fin','>=',Carbon::now()->subDays(21))
+      ->where('estado','finalizado')
+      ->select([\DB::raw("SUM(monto_pagado) as monto"), \DB::raw("count(1) as num_viajes"), \DB::raw("first_day_of_week(fecha_fin) inicia, last_day_of_week(fecha_fin) fin")])
+      ->groupBy(\DB::raw("first_day_of_week(fecha_fin), last_day_of_week(fecha_fin)"))
+      ->get();
+      
+      $viajes_detalle = $operador->viajes()->where('fecha_fin','>=',Carbon::now()->subDays(21))
+      ->select(['id','destino','monto_pagado',\DB::raw('first_day_of_week(fecha_fin) inicia')])
+      ->get();
+
+        //dd($viajes_detalle);
+
+      if ($viajes_semana->count() > 0) {
+
+        return response()->json([ 'viaje' => $viajes_semana, 'detalle' => $viajes_detalle ]);
+        //$response = [ 'viaje' => $viajes_semana->toJson(JSON_PRETTY_PRINT), 'detalle' => $viajes_detalle->toJson(JSON_PRETTY_PRINT)];
+        //return response($response,200);
+      }
+
+      return response()->json([ 'message'=>'Sin viajes encontrados']);
+  }
+
 }
