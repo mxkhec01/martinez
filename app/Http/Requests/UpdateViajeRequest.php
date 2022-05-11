@@ -23,6 +23,9 @@ class UpdateViajeRequest extends FormRequest
             'destino' => [
                 'required',
             ],
+            'monto_pagado' => [
+                'numeric'
+            ]
         ];
     }
 }

@@ -119,7 +119,7 @@
                                             <td>{{ $combustible->km }}</td>
                                             <td>{{ $combustible->litros }}</td>
                                             <td>
-                                                @if ($km_anterior != 0)
+                                                @if (($km_anterior != 0) && ($combustible->litros !=0))
                                                     {{ round(($combustible->km - $km_anterior) / $combustible->litros, 2) }}
                                                 @else
                                                     -

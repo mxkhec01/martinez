@@ -10,8 +10,8 @@ class CreateEntregasTable extends Migration
     {
         Schema::create('entregas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('fecha_llegada')->nullable();
-            $table->date('fecha_entrega')->nullable();
+            $table->timestamp('fecha_llegada')->nullable();
+            $table->timestamp('fecha_entrega')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
