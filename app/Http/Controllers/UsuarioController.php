@@ -7,6 +7,7 @@ use App\Models\Viaje;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UsuarioController extends Controller
 {
@@ -77,12 +78,21 @@ class UsuarioController extends Controller
 
         //dd(bcrypt($fields['app_pass']));
 
+        Log::info('Revisando el login del usuario: '.$user->id);
+
+        Log::info('Username: '.$fields['app_usr']);
+
+
+        Log::info('Pass: '.$fields['app_pass']);
+
         if(!$user ||  md5($fields['app_pass']) != $user->password ) {
             //
             return response ([
                 'message' => 'Credenciales incorrectas'
             ], 401);
         }
+
+
 
         $token = $user->createToken('tortonToken')->plainTextToken;
 
