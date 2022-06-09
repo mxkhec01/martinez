@@ -174,7 +174,7 @@
                             @foreach($viaje->entregas as $entrega)
                             <tr>
                                 <th scope="row">{{ $entrega->id }}</th>
-                                <td>{{ $entrega->cliente->razon_social }}</td>
+                                <td>{{ $entrega->cliente->razon_social ?? '' }}</td>
                                 <td>
                                     @livewire('facturas',['entrega'=>$entrega])
                                 </td>

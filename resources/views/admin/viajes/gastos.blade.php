@@ -2,7 +2,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3>Gastos del viaje {{ $viaje->id }} - {{ $viaje->destino }} <a class="btn btn-default float-right"
+            <h3>Gastos del viaje {{ $viaje->id }} - {{ $viaje->destino }} Operador: {{ $viaje->operador->nombre ?? '' }}<a class="btn btn-default float-right"
                     href="{{ URL::previous() }}">
                     Regresar
                 </a></h3>
@@ -309,7 +309,7 @@
                                     @foreach ($viaje->entregas as $entrega)
                                         <tr>
                                             
-                                            <td>{{ $entrega->cliente->razon_social }}</td>
+                                            <td>{{ $entrega->cliente->razon_social ?? '' }}</td>
 
                                         <tr>
                                             <td colspan="4">

@@ -99,6 +99,7 @@ class HomeController
                 $maniana= Carbon::parse($dia);
                 $pagos[] = Viaje::where('fecha_pago','>=',$dia)
                                 ->where('fecha_pago','<',$maniana->addDay())
+                                ->whereNull('deleted_at')
                                 ->sum('monto_pagado');
 
                 $anticipos [] = AnticiposViaje::where('fecha','>=',$dia)
@@ -110,7 +111,8 @@ class HomeController
                 ->leftJoin('viajes', function ($leftJoin) use($dias) {
                     $leftJoin
                         ->on('unidads.id', '=', 'viajes.unidad_id')
-                        ->on('viajes.created_at','>=',DB::raw($dias[0]));
+                        ->on('viajes.created_at','>=',DB::raw($dias[0]))
+                        ->whereNull('viajes.deleted_at');
                 })
                 ->groupBy('codigo')
                 ->orderBy('numero','desc')
@@ -124,7 +126,8 @@ class HomeController
                     $leftJoin
                         ->on('operadors.id', '=', 'viajes.operador_id')
                         ->where('viajes.fecha_fin','>=',$dias[0])
-                        ->where('viajes.estado','=','finalizado');
+                        ->where('viajes.estado','=','finalizado')
+                        ->whereNull('viajes.deleted_at');
                 })
                 ->groupBy('nombre')
                 ->orderBy('monto','desc')

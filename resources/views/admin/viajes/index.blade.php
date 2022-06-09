@@ -50,6 +50,9 @@
                             Destino
                         </th>
                         <th>
+                            Fecha Inicio
+                        </th>
+                        <th>
                             {{ trans('cruds.viaje.fields.unidad') }}
                         </th>
                         <th>
@@ -74,6 +77,8 @@
                         </td>
                         <td>
                             <input class="search" type="text" placeholder="{{ trans('global.search') }}">
+                        </td>
+                        <td>
                         </td>
                         <td>
                             <select class="search">
@@ -116,6 +121,9 @@
                             </td>
                             <td>
                                 {{ $viaje->destino ?? '' }}
+                            </td>
+                            <td>
+                                {{ $viaje->fecha_inicio ?? '' }}
                             </td>
                             <td class="text-center">
                                 {{ $viaje->unidad->codigo ?? '' }}

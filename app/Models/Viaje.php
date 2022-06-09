@@ -108,11 +108,11 @@ class Viaje extends Model
     }
 
     public function casetas(){
-        return $this->hasMany(EvidenciaCaseta::class);
+        return $this->hasMany(EvidenciaCaseta::class)->orderBy('numero_interno');
     }
 
     public function combustibles(){
-        return $this->hasMany(EvidenciaCombustible::class);
+        return $this->hasMany(EvidenciaCombustible::class)->orderBy('numero_interno');
     }
 
     public function facturas()
@@ -122,7 +122,7 @@ class Viaje extends Model
 
     public function gastos()
     {
-        return $this->hasMany(EvidenciaOtro::class);
+        return $this->hasMany(EvidenciaOtro::class)->orderBy('numero_interno');
     }
 
     public function getFechaInicioAttribute($value)

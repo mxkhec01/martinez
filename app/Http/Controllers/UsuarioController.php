@@ -77,22 +77,24 @@ class UsuarioController extends Controller
         $user = Operador::where('usuario',$fields['app_usr'])->first();
 
         //dd(bcrypt($fields['app_pass']));
-
+        if($user){
         Log::info('Revisando el login del usuario: '.$user->id);
+        }else{
+            Log::info('Usuario inexistente:'.$fields['app_usr']);
+        }
 
         Log::info('Username: '.$fields['app_usr']);
-
-
         Log::info('Pass: '.$fields['app_pass']);
 
         if(!$user ||  md5($fields['app_pass']) != $user->password ) {
             //
+            Log::info('No logra entrar el suaurio...');
             return response ([
                 'message' => 'Credenciales incorrectas'
             ], 401);
         }
 
-
+        Log::info('Usuario entra sin problema');
 
         $token = $user->createToken('tortonToken')->plainTextToken;
 
@@ -134,12 +136,13 @@ class UsuarioController extends Controller
 
       $viajes_semana = $operador->viajes()->where('fecha_fin','>=',Carbon::now()->subDays(21))
       ->where('estado','finalizado')
-      ->select([\DB::raw("SUM(monto_pagado) as monto"), \DB::raw("count(1) as num_viajes"), \DB::raw("first_day_of_week(fecha_fin) inicia, last_day_of_week(fecha_fin) fin")])
+      ->select([\DB::raw("IFNULL(SUM(monto_pagado),0) as monto"), \DB::raw("count(1) as num_viajes"), \DB::raw("first_day_of_week(fecha_fin) inicia, last_day_of_week(fecha_fin) fin")])
       ->groupBy(\DB::raw("first_day_of_week(fecha_fin), last_day_of_week(fecha_fin)"))
       ->get();
       
       $viajes_detalle = $operador->viajes()->where('fecha_fin','>=',Carbon::now()->subDays(21))
-      ->select(['id','destino','monto_pagado',\DB::raw('first_day_of_week(fecha_fin) inicia')])
+      ->where('estado','finalizado')
+      ->select(['id','destino',\DB::raw('ifnull(monto_pagado,0)as monto_pagado'),\DB::raw('first_day_of_week(fecha_fin) inicia')])
       ->get();
 
         //dd($viajes_detalle);

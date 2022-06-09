@@ -39,9 +39,9 @@
             @endphp
             <tr onclick="window.location='{{ route('admin.viajes.show', [$viaje] ) }}'" style="cursor: pointer;">
                 <th scope="row">{{ $viaje->id }}</th>
-                <td class="d-flex justify-content-center">{{  $viaje->destino }}</td>
+                <td class="d-flex justify-content-center">{{  $viaje->destino  ?? '' }}</td>
                 <td>{{  $viaje->operador->nombre ?? '' }}  </td>
-                <td>{{  $viaje->unidad->codigo }}</td>
+                <td>{{  $viaje->unidad->codigo ?? '' }}</td>
                 <td>{{  $viaje->fecha_inicio ?? '' }}</td>
 
                 <td class="{{ ($num_entregas_activas == 0 && $num_total_entregas >0 ) ? "bg-success" : "" }}">{{  $num_total_entregas }}</td>

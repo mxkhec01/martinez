@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 use File;
 use Str;
 
@@ -186,14 +187,20 @@ class SubeImagenesController extends Controller
             return response($response, 500);
         }
 
+        Log::info('Combustible: '.$request['tipo']);
         //Se busca la caseta para ver si es inserción o actualización
         $registro = EvidenciaCombustible::where('viaje_id',$request['viaje'])->where('numero_interno',$request['tipo'])->first();
 
+
+
         //Se crea la nueva instancia en caso de que no exista
         if(!$registro){
+            Log::info('Registro nuevo: '.$request['viaje']);
             $registro = new EvidenciaCombustible();
             $registro->viaje_id = $request['viaje'];
             $registro->numero_interno = $request['tipo'];
+        }else{
+            Log::info('Actualizando viaje: '.$request['viaje']);
         }
 
 
@@ -202,32 +209,39 @@ class SubeImagenesController extends Controller
                     $response_1="";
                    $name_1 = '/combustibles/'.$request['viaje'].'_'.$request['tipo'].".1.".Str::random(15)."."."png";
                    $response_1 = Storage::disk('public')->put($name_1, base64_decode($request->input('image1')),'public');
+                   Log::info('Imagen1: '.$name_1);
         }
 
        if($request->has('image2')){
                     $response_2="";
                    $name_2 = '/combustibles/'.$request['viaje'].'_'.$request['tipo'].".2.".Str::random(15)."."."png";
                    $response_2 = Storage::disk('public')->put($name_2, base64_decode($request->input('image2')),'public');
+                   Log::info('Imagen2: '.$name_2);
         }
         if($request->has('image3')){
                     $response_3="";
                    $name_3 = '/combustibles/'.$request['viaje'].'_'.$request['tipo'].".3.".Str::random(15)."."."png";
                    $response_3 = Storage::disk('public')->put($name_3, base64_decode($request->input('image3')),'public');
+                   Log::info('Imagen1: '.$name_3);
         }
         if($request->has('image4')){
                     $response_4="";
                    $name_4 = '/combustibles/'.$request['viaje'].'_'.$request['tipo'].".4.".Str::random(15)."."."png";
                    $response_4 = Storage::disk('public')->put($name_4, base64_decode($request->input('image4')),'public');
+                   Log::info('Imagen1: '.$name_4);
         }
         if($request->has('image5')){
                     $response_5="";
                    $name_5 = '/combustibles/'.$request['viaje'].'_'.$request['tipo'].".5.".Str::random(15)."."."png";
                    $response_5 = Storage::disk('public')->put($name_5, base64_decode($request->input('image5')),'public');
+                   Log::info('Imagen1: '.$name_5);
         }
 
 
         for ($i = 1; $i < 6; $i++) {
             if (File::exists(public_path("storage/" . $registro["foto" . $i . "_url"]))) {
+                
+                Log::info('Foto Existía: '.$registro["foto" . $i . "_url"]);
                 File::delete(public_path("storage/" . $registro["foto" . $i . "_url"]));
             }
         }
