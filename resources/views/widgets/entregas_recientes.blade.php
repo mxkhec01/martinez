@@ -1,0 +1,1 @@
+@livewire('entregas-show',['viajes' => $viajes])

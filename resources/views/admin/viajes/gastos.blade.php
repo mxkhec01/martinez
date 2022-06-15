@@ -112,7 +112,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($viaje->combustibles as $combustible)
+                                    @foreach ($viaje->combustibles->sortBy('created_at') as $combustible)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>@money($combustible->monto)</td>

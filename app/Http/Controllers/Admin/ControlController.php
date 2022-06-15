@@ -25,7 +25,14 @@ class ControlController extends Controller
 
        // $operadors = Operador::get();
 
-        return view('admin.control.index', compact(  'viajes'));
+        return view('admin.control.index', compact('viajes'));
+    }
+
+
+    public function muestra()
+    {
+
+        return view('admin.control.index_hide');
     }
 
     /**

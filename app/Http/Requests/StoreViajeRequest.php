@@ -24,6 +24,7 @@ class StoreViajeRequest extends FormRequest
             'destino' => [
                 'required',
             ],
+            'operador_id' => [ 'required_if:estado,activo',],
         ];
     }
 }

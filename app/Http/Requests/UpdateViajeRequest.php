@@ -25,7 +25,9 @@ class UpdateViajeRequest extends FormRequest
             ],
             'monto_pagado' => [
                 'numeric'
-            ]
+            ],
+            'operador_id' => [ 'required_if:estado,activo',],
+
         ];
     }
 }
