@@ -130,6 +130,17 @@
                         <span class="help-block">{{ trans('cruds.viaje.fields.estado_helper') }}</span>
                     </div>
 
+                    <div class="form-group col-md-6">
+                        <label class="form-label {{ $errors->has('comentario') ? 'is-invalid' : '' }}" for="comentarios">Comentarios</label>
+                        <textarea class="form-control" name="comentarios" id="comentarios" rows="3">{{ old('comentarios', $viaje->comentarios) }}</textarea>
+                       @if($errors->has('comentarios'))
+                           <div class="invalid-feedback">
+                               {{ $errors->first('comentarios') }}
+                           </div>
+                       @endif
+                       <span class="help-block">{{ trans('cruds.viaje.fields.nombre_viaje_helper') }}</span>
+                   </div>
+
 
                 </div>
                 <div class="form-group">

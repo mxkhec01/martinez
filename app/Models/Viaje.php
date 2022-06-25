@@ -82,6 +82,8 @@ class Viaje extends Model
         'updated_at',
         'deleted_at',
         'carga',
+        'comentarios',
+        'esconder',
     ];
 
     public function unidad()

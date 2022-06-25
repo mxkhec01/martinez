@@ -15,7 +15,7 @@ class EntregasShow extends Component
 
         $this->viajes = Viaje::with([ 'unidad', 'operador'])
         ->where('estado','=','activo')
-        ->whereNull('fecha_pago')
+        ->where('esconder',0)
         ->get();
     }
 
@@ -28,16 +28,28 @@ class EntregasShow extends Component
     public function oculta_viaje($viaje_id)
     {
         
-        Viaje::where('id',$viaje_id)->update(['fecha_pago'=>now()]);
+        $viaje_ocultar = Viaje::find($viaje_id);
+
+        
+
+        if ($viaje_ocultar->esconder == 0) {
+            $viaje_ocultar->esconder = 1;
+        } else{
+            $viaje_ocultar->esconder = 0;
+        }
+
+
+        $viaje_ocultar->save();
+        // Viaje::where('id',$viaje_id)->update(['fecha_pago'=>now()]);
         $this->viajes->fresh();
       
     }
 
     public function pinta(){
-        if ($this->ismuestraEscondidos ==false) {
+        if ($this->ismuestraEscondidos == false) {
             $this->viajes = Viaje::with([ 'unidad', 'operador'])
             ->where('estado','=','activo')
-            ->whereNull('fecha_pago')
+            ->where('esconder',0)
             ->get();
         } else {
             $this->viajes = Viaje::with([ 'unidad', 'operador'])

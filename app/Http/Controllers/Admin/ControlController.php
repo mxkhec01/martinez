@@ -19,13 +19,11 @@ class ControlController extends Controller
      */
     public function index()
     {
-        $viajes = Viaje::with([ 'unidad', 'operador'])->where('estado','=','activo')->get();
+        return view('admin.control.index_hide');
 
-      //  $unidads = Unidad::get();
+//        $viajes = Viaje::with([ 'unidad', 'operador'])->where('estado','=','activo')->get();
 
-       // $operadors = Operador::get();
-
-        return view('admin.control.index', compact('viajes'));
+  //      return view('admin.control.index', compact('viajes'));
     }
 
 

@@ -68,7 +68,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
 
     // Torre de control
-    Route::get('control2', 'ControlController@muestra');
+    Route::get('control', 'ControlController@muestra');
     Route::resource('control', 'ControlController');
 
 

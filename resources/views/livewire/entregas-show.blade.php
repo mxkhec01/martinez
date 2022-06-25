@@ -30,8 +30,8 @@
                     @endphp
                     <tr style="cursor: pointer;" wire:key={{ $loop->index }}>
                         <th scope="row">{{ $viaje->id }}</th>
-                        <td> <input type="radio" wire:click="oculta_viaje({{ $viaje->id }})"
-                                @if ($viaje->fecha_pago) checked="checked" @endif /> </td>
+                        <td> <input type="checkbox" wire:click="oculta_viaje({{ $viaje->id }})"
+                                @if ($viaje->esconder==1) checked="checked" @endif /> </td>
                         <td onclick="window.location='{{ route('admin.viajes.show', [$viaje]) }}'"
                             class="d-flex justify-content-center">{{ $viaje->destino ?? '' }}</td>
                         <td>{{ $viaje->operador->nombre ?? '' }} </td>

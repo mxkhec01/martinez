@@ -33,6 +33,12 @@
             <!-- ABRO SUMATORIA-->
             <div class="card card_compacto">
                 <div class="card-body">
+                    @if($viaje->comentarios)
+                    <div class="alert alert-info" role="alert">
+                        <h4 class="alert-heading">Comentarios:</h4>
+                        <p>{{ $viaje->comentarios }} </p>
+                    </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -112,7 +118,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($viaje->combustibles->sortBy('created_at') as $combustible)
+                                    @foreach ($viaje->combustibles as $combustible)
                                         <tr>
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>@money($combustible->monto)</td>

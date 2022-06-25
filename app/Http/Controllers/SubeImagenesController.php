@@ -8,6 +8,7 @@ use App\Models\EvidenciaCombustible;
 use App\Models\EvidenciaOtro;
 use App\Models\Factura;
 use App\Models\Operador;
+use App\Models\Viaje;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -78,6 +79,24 @@ class SubeImagenesController extends Controller
         $viaje = $request['viaje'];
         $registro = $request['registro'];
 
+        $viaje_activo = Viaje::where("id",$viaje)->where("estado","activo")->firstOrFail();
+
+        Log::info('Eliminar del Viaje: '.$request['viaje']);
+
+        if(!$viaje_activo) {
+            Log::info('Viaje Activo nulo'.$request['viaje']);
+            $response = [
+                'Error' => 'No se encontró el registro',
+                'Tipo' => $tipo,
+                'Viaje' => $viaje,
+                'registro' => $registro,
+                'request' => $request, ];
+
+                return response($response,404);
+
+        }
+        else{
+
         if($tipo == "combustible")
         {
             $record = EvidenciaCombustible::where("viaje_id",$viaje)
@@ -107,6 +126,7 @@ class SubeImagenesController extends Controller
             'registro' => $registro,
             'request' => $request,
         ];
+    }
         return response($response,404);
     }
 
@@ -125,6 +145,8 @@ class SubeImagenesController extends Controller
             ];
             return response($response, 500);
         }
+        $viaje = $request['viaje'];
+        $viaje_activo = Viaje::where("id",$viaje)->where("estado","activo")->firstOrFail();
 
          //Se busca la caseta para ver si es inserción o actualización
          $caseta = EvidenciaCaseta::where('viaje_id',$request['viaje'])->where('numero_interno',$request['caseta'])->first();
@@ -187,6 +209,9 @@ class SubeImagenesController extends Controller
             return response($response, 500);
         }
 
+        $viaje = $request['viaje'];
+        $viaje_activo = Viaje::where("id",$viaje)->where("estado","activo")->firstOrFail();
+        
         Log::info('Combustible: '.$request['tipo']);
         //Se busca la caseta para ver si es inserción o actualización
         $registro = EvidenciaCombustible::where('viaje_id',$request['viaje'])->where('numero_interno',$request['tipo'])->first();
