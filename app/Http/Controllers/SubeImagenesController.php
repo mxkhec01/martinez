@@ -146,6 +146,8 @@ class SubeImagenesController extends Controller
             return response($response, 500);
         }
         $viaje = $request['viaje'];
+
+        Log::info('Viaje: '.$viaje.'  Caseta:'.$request['caseta']);
         $viaje_activo = Viaje::where("id",$viaje)->where("estado","activo")->firstOrFail();
 
          //Se busca la caseta para ver si es inserción o actualización
