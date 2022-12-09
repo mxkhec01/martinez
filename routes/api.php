@@ -18,8 +18,7 @@ Route::group(['middleware'=>['auth:sanctum']], function() {
  //   Route::get('borra-caseta/{id}/{viaje}', [\App\Http\Controllers\SubeImagenesController::class,'destroy']);
     Route::post('borra-registro', [\App\Http\Controllers\SubeImagenesController::class,'destroy_gasto']);
     Route::get('viajes_semanas', [\App\Http\Controllers\UsuarioController::class,'viajes_semanas']);
-    
-
+    Route::get('viajes_recientes', [\App\Http\Controllers\UsuarioController::class,'viajes_recientes']);
 });
 
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', 'middleware' => ['auth:sanctum']], function () {

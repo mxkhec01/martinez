@@ -4,20 +4,8 @@
     <option name="openedFilesInfos">
       <list>
         <OpenedFileInfo>
-          <option name="caretOffset" value="5917" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/viajes/create.blade.php" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="1058" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/AnticiposViaje.php" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
           <option name="caretOffset" value="3087" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/Viaje.php" />
-        </OpenedFileInfo>
-        <OpenedFileInfo>
-          <option name="caretOffset" value="3827" />
-          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/SubeImagenesController.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
           <option name="caretOffset" value="1322" />
@@ -40,8 +28,20 @@
           <option name="fileUrl" value="file://$PROJECT_DIR$/app/Models/EvidenciaCaseta.php" />
         </OpenedFileInfo>
         <OpenedFileInfo>
-          <option name="caretOffset" value="0" />
+          <option name="caretOffset" value="394" />
           <option name="fileUrl" value="file://$PROJECT_DIR$/resources/views/admin/viajes/gastos.blade.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="1264" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/routes/api.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="0" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/SubeImagenesController.php" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="2816" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/app/Http/Controllers/UsuarioController.php" />
         </OpenedFileInfo>
       </list>
     </option>

@@ -73,9 +73,9 @@ class SubeImagenesController extends Controller
      */
     public function destroy_gasto(Request $request)
     {
-        
+
         $tipo = $request['tipo'];
-        
+
         $viaje = $request['viaje'];
         $registro = $request['registro'];
 
@@ -213,7 +213,7 @@ class SubeImagenesController extends Controller
 
         $viaje = $request['viaje'];
         $viaje_activo = Viaje::where("id",$viaje)->where("estado","activo")->firstOrFail();
-        
+
         Log::info('Combustible: '.$request['tipo']);
         //Se busca la caseta para ver si es inserción o actualización
         $registro = EvidenciaCombustible::where('viaje_id',$request['viaje'])->where('numero_interno',$request['tipo'])->first();
@@ -267,15 +267,15 @@ class SubeImagenesController extends Controller
 
         for ($i = 1; $i < 6; $i++) {
             if (File::exists(public_path("storage/" . $registro["foto" . $i . "_url"]))) {
-                
+
                 Log::info('Foto Existía: '.$registro["foto" . $i . "_url"]);
                 File::delete(public_path("storage/" . $registro["foto" . $i . "_url"]));
             }
         }
 
-        $registro->monto = $request['monto'] ?? '';
+        $registro->monto = $request['monto'] ?? '0';
         $registro->km = $request['km'] ?? '';
-        $registro->litros = $request['litros'] ?? '';
+        $registro->litros = $request['litros'] ?? '0';
         $registro->convenio = $request['convenio'] ?? '';
 
         $registro->foto1_url = $name_1 ?? '' ;
@@ -399,7 +399,7 @@ class SubeImagenesController extends Controller
          $factura = Factura::where('id',$request['factura'])->first();
 
          //Se crea la nueva instancia en caso de que no exista
-        
+
          $response="";
 
         if ($request->hasFile('image')){
@@ -432,6 +432,6 @@ class SubeImagenesController extends Controller
 
     }
 
-   
+
 
 }

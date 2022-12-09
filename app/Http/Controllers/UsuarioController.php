@@ -115,10 +115,10 @@ class UsuarioController extends Controller
 
     public function obten_viajes($id) {
         $viajes =  Viaje::with(['entregas','entregas.facturas','entregas.cliente','unidad','anticipos'])->where('operador_id',$id)->where('estado','activo')->get();
-
+        Log::info('Revisando viajes del usuario: '.$id);
         if ($viajes->count() > 0) {
             $response = $viajes->toJson(JSON_PRETTY_PRINT) ;
-
+            Log::info('Viaje del usuario: '.$id. ' tamaño de respuesta: '.strlen($response));
             return response($response,200);
 
         }
@@ -133,13 +133,15 @@ class UsuarioController extends Controller
 
       $operador = auth()->user();
 
+      Log::info('Revisando viajes semana del usuario: '.$operador->id);
+
 
       $viajes_semana = $operador->viajes()->where('fecha_fin','>=',Carbon::now()->subDays(21))
       ->where('estado','finalizado')
       ->select([\DB::raw("IFNULL(SUM(monto_pagado),0) as monto"), \DB::raw("count(1) as num_viajes"), \DB::raw("first_day_of_week(fecha_fin) inicia, last_day_of_week(fecha_fin) fin")])
       ->groupBy(\DB::raw("first_day_of_week(fecha_fin), last_day_of_week(fecha_fin)"))
       ->get();
-      
+
       $viajes_detalle = $operador->viajes()->where('fecha_fin','>=',Carbon::now()->subDays(21))
       ->where('estado','finalizado')
       ->select(['id','destino',\DB::raw('ifnull(monto_pagado,0)as monto_pagado'),\DB::raw('first_day_of_week(fecha_fin) inicia')])
@@ -149,12 +151,34 @@ class UsuarioController extends Controller
 
       if ($viajes_semana->count() > 0) {
 
-        return response()->json([ 'viaje' => $viajes_semana, 'detalle' => $viajes_detalle ]);
+          $respuesta = response()->json(['viaje' => $viajes_semana, 'detalle' => $viajes_detalle]);
+          Log::info('viajes semana: '.$operador->id.' Tamaño respuesta: '. strlen($respuesta));
+
+          return $respuesta;
+
+
         //$response = [ 'viaje' => $viajes_semana->toJson(JSON_PRETTY_PRINT), 'detalle' => $viajes_detalle->toJson(JSON_PRETTY_PRINT)];
         //return response($response,200);
       }
 
       return response()->json([ 'message'=>'Sin viajes encontrados']);
+
+  }
+
+  public function viajes_recientes()
+  {
+      $operador = auth()->user();
+      Log::info('Revisando viajes recientes del usuario: '.$operador->id);
+
+      $viajes_recientes = $operador->viajes()->where('fecha_fin','>=',Carbon::now()->subDays(21))
+          ->select(['id'])
+          ->get();
+
+      $response = $viajes_recientes->toJson(JSON_PRETTY_PRINT) ;
+
+      Log::info('Viaje recientes: '.$operador->id. 'tamaño de respuesta: '.strlen($response));
+
+      return $response;
   }
 
 }
