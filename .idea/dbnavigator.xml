@@ -28,13 +28,13 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="e7c22b08-32d6-49f3-a205-5ca80bd1c77c">
-      <console name="Laravel - local" type="STANDARD" schema="laravel" session="Main">select * from laravel.viajes where fecha_fin is not null;
+      <console name="Laravel - local" type="STANDARD" schema="laravel" session="Main"><![CDATA[select * from laravel.viajes where fecha_fin is not null;
 
 select viajes.id, viajes.destino, viajes.monto_pagado , fecha_fin
 from `operadors` 
 left join `viajes` 
 on `operadors`.`id` = `viajes`.`operador_id` 
-and `viajes`.`fecha_fin` &gt;= '2022-03-23' 
+and `viajes`.`fecha_fin` >= '2022-03-23' 
 and `viajes`.`estado` = 'finalizado' 
 where `operadors`.`deleted_at` is null 
 and operadors.id = 19
@@ -42,13 +42,14 @@ and operadors.id = 19
 
 
 select * from viajes where `estado` = 'finalizado'
- and `viajes`.`fecha_fin` &gt;= '2022-04-02' ;</console>
+ and `viajes`.`fecha_fin` >= '2022-04-02' ;]]></console>
     </connection>
   </component>
+  <component name="DBNavigator.Project.DatabaseEditorStateManager">
+    <last-used-providers />
+  </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="e7c22b08-32d6-49f3-a205-5ca80bd1c77c" object-ref="consoles/Laravel - local" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="e7c22b08-32d6-49f3-a205-5ca80bd1c77c" />
@@ -139,7 +140,7 @@ select * from viajes where `estado` = 'finalizado'
           <alternative-statement-delimiter value="" />
         </details>
         <object-filters hide-empty-schemas="false" hide-pseudo-columns="false">
-          <object-type-filter use-master-settings="true">
+          <object-type-filter>
             <object-type name="SCHEMA" enabled="true" />
             <object-type name="USER" enabled="true" />
             <object-type name="ROLE" enabled="true" />
@@ -210,6 +211,7 @@ select * from viajes where `estado` = 'finalizado'
         <object-type name="FUNCTION" sorting-type="NAME" />
         <object-type name="PROCEDURE" sorting-type="NAME" />
         <object-type name="ARGUMENT" sorting-type="POSITION" />
+        <object-type name="TYPE ATTRIBUTE" sorting-type="POSITION" />
       </sorting>
       <default-editors>
         <object-type name="VIEW" editor-type="SELECTION" />
@@ -256,11 +258,11 @@ select * from viajes where `estado` = 'finalizado'
         <nulls-first value="true" />
         <max-sorting-columns value="4" />
       </sorting>
-      <tracking-columns>
-        <columnNames value="" />
+      <audit-columns>
+        <column-names value="" />
         <visible value="true" />
         <editable value="false" />
-      </tracking-columns>
+      </audit-columns>
     </dataset-grid-settings>
     <dataset-editor-settings>
       <text-editor-popup>

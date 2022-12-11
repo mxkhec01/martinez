@@ -12,9 +12,16 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    protected $namespace = 'App\Http\Controllers';
+
     public function register()
     {
         //
+    }
+
+    protected function map()
+    {
+        $this->mapApiV2Routes();
     }
 
     /**
@@ -27,5 +34,13 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('money', function ($amount) {
             return "<?php echo '$' . number_format($amount, 2); ?>";
         });
+    }
+
+    protected function mapApiV2Routes()
+    {
+        route::prefix('api/v2')
+            ->middleware('api')
+            ->namespace($this->namespace.'\\Api\\V2')
+            ->group(base_path('routes/api.php'));
     }
 }
